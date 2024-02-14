@@ -9,6 +9,8 @@ import CartPage from "../pages/CartPage/CartPage.tsx";
 import FavoritePage from "../pages/FavoritePage/FavoritePage.tsx";
 
 import {ROUTES} from "./routes.ts";
+import LoginPage from "../pages/LoginPage/LoginPage.tsx";
+import RegisterPage from "../pages/RegisterPage/RegisterPage.tsx";
 
 export const router = createBrowserRouter([
     {
@@ -18,6 +20,14 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 element: <HomePage/>
+            },
+            {
+                element: <LoginPage/>,
+                path: ROUTES.LOGIN,
+            },
+            {
+                element: <RegisterPage/>,
+                path: ROUTES.REGISTER,
             },
             {
                 path: ROUTES.CART,

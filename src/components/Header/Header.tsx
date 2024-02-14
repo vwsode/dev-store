@@ -17,7 +17,7 @@ const Header = () => {
             <div className='header-top'>
                 <Container>
                     <div className='header-top__wrapper'>
-                        <div className="header-top__logo">
+                        <div  className="header-top__logo">
                             <JordanLogo/>
                         </div>
                         <nav className='header-top__nav'>
@@ -35,7 +35,7 @@ const Header = () => {
                                 </li>
                                 |
                                 <li className="header-top__nav-item">
-                                    <NavLink className='header-top__nav-link' to={ROUTES.CATALOG}>Sign In</NavLink>
+                                    <NavLink className='header-top__nav-link' to={ROUTES.LOGIN}>Sign In</NavLink>
                                 </li>
                             </ul>
                         </nav>
@@ -45,9 +45,9 @@ const Header = () => {
             <header className='header'>
                 <Container>
                     <div className='header__wrapper'>
-                        <div className="header__logo">
+                        <NavLink to={ROUTES.MAIN} className="header__logo">
                             <NikeLogo/>
-                        </div>
+                        </NavLink>
                         <nav className='header__nav nav'>
                             <ul className='nav__list'>
                                 <li className='nav__item'>
