@@ -5,7 +5,7 @@ import './Button.scss';
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     children: ReactNode;
     variant: "dark" | "light";
-    rounded: boolean;
+    rounded?: boolean;
 
 }
 

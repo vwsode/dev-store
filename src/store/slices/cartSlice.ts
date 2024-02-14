@@ -1,11 +1,20 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+
+export const fetchCart = createAsyncThunk(
+    'cart/fetchCart',
+    async () => {
+        return new Promise((r) => setTimeout(r, 2000));
+    }
+)
 
 interface CartState {
-    cart: []
+    cart: [];
+    loading: boolean;
 }
 
 const initialState: CartState = {
-    cart: []
+    cart: [],
+    loading: false,
 };
 
 export const cartSlice = createSlice({
@@ -22,7 +31,7 @@ export const cartSlice = createSlice({
             }
         },
         removeFromCart: (state, action) => {
-            state.cart = state.cart.filter(item => item !== action.payload);
+            state.cart = state.cart.filter(item => item.id != action.payload);
         },
         increaseQuantity: (state, action) => {
             const item = state.cart.find(item => item.id = action.payload);
@@ -37,6 +46,19 @@ export const cartSlice = createSlice({
                 item.quantity--;
             }
         },
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchCart.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(fetchCart.fulfilled, (state) => {
+                state.loading = false;
+                console.log('hello')
+            })
+            .addCase(fetchCart.rejected, (state) => {
+                state.loading = false;
+            })
     }
 });
 

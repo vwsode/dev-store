@@ -10,14 +10,17 @@ import CartIcon from "../../assets/icons/cart.svg?react";
 import FavIcon from "../../assets/icons/favorite.svg?react";
 
 import './Header.scss';
+import useCart from "../../hooks/useCart.ts";
 
 const Header = () => {
+    const {cart} = useCart();
+
     return (
         <>
             <div className='header-top'>
                 <Container>
                     <div className='header-top__wrapper'>
-                        <div  className="header-top__logo">
+                        <div className="header-top__logo">
                             <JordanLogo/>
                         </div>
                         <nav className='header-top__nav'>
@@ -76,7 +79,7 @@ const Header = () => {
                             </NavLink>
                             <NavLink className='header-action-btn' to={ROUTES.CART}>
                                 <CartIcon/>
-                                <span className='header-action-btn__badge'>5</span>
+                                {cart.length ? <span className='header-action-btn__badge'>{cart.length}</span> : ''}
                             </NavLink>
                         </div>
                     </div>

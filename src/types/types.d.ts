@@ -1,0 +1,7 @@
+interface Product {
+
+}
+
+interface User {
+
+}

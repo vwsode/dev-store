@@ -1,7 +1,10 @@
 import Container from "../../components/Container/Container.tsx";
+import RegisterForm from "../../components/RegisterForm/RegisterForm.tsx";
 
 const RegisterPage = () => (
-    <Container size="sm">Reg Page</Container>
+    <Container size="sm">
+        <RegisterForm/>
+    </Container>
 );
 
 export default RegisterPage;
