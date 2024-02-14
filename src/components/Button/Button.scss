@@ -1,0 +1,60 @@
+.btn {
+  outline: none;
+  border: none;
+}
+
+.btn-dark {
+  display: inline-block;
+  vertical-align: top;
+  white-space: nowrap;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease 0s;
+  background: rgb(17, 17, 17);
+  color: rgb(255, 255, 255);
+  -moz-box-pack: center;
+  justify-content: center;
+  width: 100%;
+  padding: 18px 24px;
+  font-size: 16px;
+  border-radius: 30px;
+  font-family: inherit;
+
+  transition: background-color 100ms;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.75);
+    }
+  }
+}
+
+.btn-light {
+  display: inline-block;
+  vertical-align: top;
+  white-space: nowrap;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 18px 24px;
+  font-size: 16px;
+  border-radius: 30px;
+  border: 1px solid var(--gray-500);
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background: transparent;
+  color: var(--gray-100);
+
+  transition: border-color 100ms;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      border-color: var(--gray-400);
+    }
+  }
+}
