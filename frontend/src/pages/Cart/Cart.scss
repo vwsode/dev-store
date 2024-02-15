@@ -41,6 +41,8 @@
   }
 
   &__title {
+    font-size: 32px;
+    font-weight: 500;
   }
 
   &__items {
@@ -61,6 +63,11 @@
 
 }
 
+.cart-empty-message {
+  font-size: 18px;
+  line-height: 24px;
+
+}
 
 .cart-summary {
   width: 350px;

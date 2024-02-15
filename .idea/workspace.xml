@@ -4,7 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb454b0d-8f76-4068-901a-392b330216a3" name="Changes" comment="" />
+    <list default="true" id="cb454b0d-8f76-4068-901a-392b330216a3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/icons/facebook.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/icons/instagram.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/icons/twitter.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/icons/youtube.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/Footer/Footer.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/Footer/Footer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/scss/_common.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/scss/_common.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Header/Header.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Header/Header.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Layout/Layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Layout/Layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Cart/Cart.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Cart/Cart.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Cart/Cart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Cart/Cart.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,23 +37,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Konstantin/Documents/Work/Learn/react/react-nike/src/pages/CatalogPage&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\Konstantin\\Documents\\Work\\Learn\\react\\react-nike\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/Konstantin/Documents/Work/Learn/react/react-nike/src/pages/CatalogPage",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
+    "settings.editor.splitter.proportion": "0.2330407",
+    "ts.external.directory.path": "C:\\Users\\Konstantin\\Documents\\Work\\Learn\\react\\react-nike\\frontend\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Konstantin\Documents\Work\Learn\react\react-nike\src\pages\CatalogPage" />
@@ -61,6 +75,8 @@
       <workItem from="1707980811706" duration="3628000" />
       <workItem from="1707986945874" duration="8471000" />
       <workItem from="1708002351017" duration="66000" />
+      <workItem from="1708005057095" duration="1384000" />
+      <workItem from="1708010489478" duration="3264000" />
     </task>
     <servers />
   </component>

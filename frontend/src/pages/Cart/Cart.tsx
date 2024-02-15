@@ -15,8 +15,6 @@ const Cart = () => {
         loadCart();
     }, [])
 
-    // PRIVIET DENIS
-
     return (
         <section className='cart'>
             <Container size="sm">
@@ -30,24 +28,30 @@ const Cart = () => {
                             </div>
                         </div>
                         <h2 className="cart__title">Bag</h2>
-                        <div className="cart__items">
-                            {cart.map((item) => (
-                                <Fragment key={item.id}>
-                                    {!loading ?
-                                        (
-                                            <CartItem
-                                                id={item.id}
-                                                images={item.images}
-                                                title={item.title}
-                                                price={item.price}
-                                                category={item.category}
-                                            />
-                                        ) : <CartItem.Skeleton></CartItem.Skeleton>
-                                    }
-                                    <hr/>
-                                </Fragment>
-                            ))}
-                        </div>
+                        {
+                            cart.length ? (
+                                <div className="cart__items">
+                                    {cart.map((item) => (
+                                        <Fragment key={item.id}>
+                                            {!loading ?
+                                                (
+                                                    <CartItem
+                                                        id={item.id}
+                                                        images={item.images}
+                                                        title={item.title}
+                                                        price={item.price}
+                                                        category={item.category}
+                                                    />
+                                                ) : <CartItem.Skeleton></CartItem.Skeleton>
+                                            }
+                                            <hr/>
+                                        </Fragment>
+                                    ))}
+                                </div>
+                            ) : (
+                                <p className="cart-empty-message">There are no items in your bag.</p>
+                            )
+                        }
                     </div>
                     <div className="cart-summary">
                         <h6 className="cart-summary__title">Summary</h6>
@@ -56,7 +60,7 @@ const Cart = () => {
                         </div>
                         <div className="cart-summary__total">
                             <span className="cart-summary__total-title">Total</span>
-                            <span className="cart-summary__total-value">${totalPrice}</span>
+                            <span className="cart-summary__total-value">{cart.length ? `$${totalPrice}` : '—'}</span>
                         </div>
                         <Button variant="dark">Checkout</Button>
                     </div>
