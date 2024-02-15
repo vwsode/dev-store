@@ -6,6 +6,7 @@ import {useParams} from "react-router";
 import useProducts from "../../hooks/useProducts.ts";
 import {useEffect} from "react";
 import useCart from "../../hooks/useCart.ts";
+import SizeGrid from "../../components/SizeGrid/SizeGrid.tsx";
 
 const Product = () => {
     const {id} = useParams();
@@ -32,8 +33,6 @@ const Product = () => {
         <Container size="sm">
             <section className="product">
                 <div className="product__images">
-                    {loading ? 'Loading' : 'Loaded '}
-
                     {product.images.map((img) => (
                         <img key={img} src={img} alt="Image "/>
                     ))}
@@ -46,6 +45,7 @@ const Product = () => {
                     <div className="product__text">
                         <span className="product__price">${product.price}</span>
                     </div>
+                    <SizeGrid/>
                     <div className="product__actions">
                         {isItemInCart ? (
                             <Button variant="dark" onClick={removeCartHandler}>

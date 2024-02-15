@@ -39,6 +39,8 @@ export const Input = styled.input`
   
   font-family: inherit;
   
+  max-width: 130px;
+  
   color: var(--gray-200);
   
   &::placeholder {
