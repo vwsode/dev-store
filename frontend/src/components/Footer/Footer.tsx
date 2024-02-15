@@ -1,6 +1,8 @@
-import * as S from './Footer.styles.ts';
 import Container from "../Container/Container.tsx";
+
 import {ROUTES} from "../../config/routes.ts";
+
+import * as S from './Footer.styles.ts';
 
 import Facebook from '../../assets/icons/facebook.svg?react';
 import Instagram from '../../assets/icons/instagram.svg?react';
