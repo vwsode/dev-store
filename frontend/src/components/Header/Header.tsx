@@ -1,6 +1,9 @@
 import {NavLink} from "react-router-dom";
 
+import useCart from "../../hooks/useCart.ts";
+
 import Container from "../Container/Container.tsx";
+import Search from "../Search/Search.tsx";
 
 import {ROUTES} from "../../config/routes.ts";
 
@@ -10,7 +13,6 @@ import CartIcon from "../../assets/icons/cart.svg?react";
 import FavIcon from "../../assets/icons/favorite.svg?react";
 
 import './Header.scss';
-import useCart from "../../hooks/useCart.ts";
 
 const Header = () => {
     const {cart} = useCart();
@@ -34,7 +36,7 @@ const Header = () => {
                                 </li>
                                 |
                                 <li className="header-top__nav-item">
-                                    <NavLink className='header-top__nav-link' to={ROUTES.CATALOG}>Join Us</NavLink>
+                                    <NavLink className='header-top__nav-link' to={ROUTES.REGISTER}>Join Us</NavLink>
                                 </li>
                                 |
                                 <li className="header-top__nav-item">
@@ -74,6 +76,7 @@ const Header = () => {
                             </ul>
                         </nav>
                         <div className="header__btns">
+                            <Search placeholder="Search"/>
                             <NavLink className='header-action-btn' to={ROUTES.FAVORITES}>
                                 <FavIcon/>
                             </NavLink>

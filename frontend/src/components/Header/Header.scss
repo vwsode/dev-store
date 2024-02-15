@@ -54,8 +54,12 @@
   z-index: 2;
 
   &__wrapper {
-    display: flex;
-    justify-content: space-between;
+    //display: flex;
+    //justify-content: space-between;
+    //align-items: center;
+
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
     align-items: center;
   }
 
@@ -68,6 +72,7 @@
   &__btns {
     display: flex;
     gap: 16px;
+    justify-content: flex-end;
   }
 }
 
@@ -75,6 +80,7 @@
   height: 60px;
   display: flex;
   align-items: center;
+  justify-content: center;
 
   &__list {
     display: flex;
@@ -96,8 +102,8 @@
     align-items: center;
 
     text-decoration: none;
-    font-weight: 500;
-    font-size: 15px;
+    font-weight: 600;
+    font-size: 17px;
     line-height: 24px;
     color: var(--gray-200);
     height: 100%;

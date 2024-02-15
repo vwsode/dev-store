@@ -5,13 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cb454b0d-8f76-4068-901a-392b330216a3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/Checkbox/Checkbox.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/RegisterForm/RegisterForm.styles.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/icons/search.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/Search/Search.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Footer/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Footer/Footer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/LoginForm/LoginForm.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/LoginForm/LoginForm.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/RegisterForm/RegisterForm.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Checkbox/Checkbox.styles.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/RegisterForm/RegisterForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/RegisterForm/RegisterForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Header/Header.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Header/Header.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Header/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Header/Header.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +69,7 @@
       <workItem from="1707986945874" duration="8471000" />
       <workItem from="1708002351017" duration="66000" />
       <workItem from="1708005057095" duration="1384000" />
-      <workItem from="1708010489478" duration="6853000" />
+      <workItem from="1708010489478" duration="9372000" />
     </task>
     <servers />
   </component>
