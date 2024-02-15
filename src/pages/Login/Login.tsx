@@ -1,10 +1,10 @@
 import Container from "../../components/Container/Container.tsx";
 import LoginForm from "../../components/LoginForm/LoginForm.tsx";
 
-const LoginPage = () => (
+const Login = () => (
     <Container size="sm">
         <LoginForm />
     </Container>
 );
 
-export default LoginPage;
+export default Login;

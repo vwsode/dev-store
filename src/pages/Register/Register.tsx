@@ -1,10 +1,10 @@
 import Container from "../../components/Container/Container.tsx";
 import RegisterForm from "../../components/RegisterForm/RegisterForm.tsx";
 
-const RegisterPage = () => (
+const Register = () => (
     <Container size="sm">
         <RegisterForm/>
     </Container>
 );
 
-export default RegisterPage;
+export default Register;

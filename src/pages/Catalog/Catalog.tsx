@@ -1,11 +1,11 @@
 import ProductItem from "../../components/ProductItem/ProductItem.tsx";
 import Container from "../../components/Container/Container.tsx";
 
-import './CatalogPage.scss';
+import './Catalog.scss';
 import useProducts from "../../hooks/useProducts.ts";
 import {useEffect} from "react";
 
-const CatalogPage = () => {
+const Catalog = () => {
     const {products, setProducts} = useProducts();
 
     useEffect(() => {
@@ -17,14 +17,14 @@ const CatalogPage = () => {
             <Container>
                 <div className="catalog-grid">
                     {products.map((item) => (
-                        <ProductItem key={item.id}
-                                     id={item.id}
-                                     title={item.title}
-                                     price={item.price}
-                                     description={item.description}
-                                     category={item.category}
-                                     images={item.images}
-
+                        <ProductItem
+                            key={item.id}
+                            id={item.id}
+                            title={item.title}
+                            price={item.price}
+                            description={item.description}
+                            category={item.category}
+                            images={item.images}
                         />
                     ))}
                 </div>
@@ -33,4 +33,4 @@ const CatalogPage = () => {
     );
 }
 
-export default CatalogPage;
+export default Catalog;

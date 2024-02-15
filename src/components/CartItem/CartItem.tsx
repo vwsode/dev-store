@@ -6,17 +6,17 @@ import ContentLoader from "react-content-loader";
 import useCart from "../../hooks/useCart.ts";
 
 interface ICartItem {
-    id: string;
+    id: number;
     images: string[];
     title: string;
-    price: string;
+    price: number;
     category: {
         name: string
     }
 }
 
 const CartItem = ({title, price, category, id, images}: ICartItem) => {
-    const {removeFromCart} = useCart();
+    const {removeItemFormCart} = useCart();
 
     return (
         <div className="cart-item">
@@ -44,7 +44,7 @@ const CartItem = ({title, price, category, id, images}: ICartItem) => {
                     <button className="cart-item__action-btn">
                         <FavIcon/>
                     </button>
-                    <button className="cart-item__action-btn" onClick={() => removeFromCart(id)}>
+                    <button className="cart-item__action-btn" onClick={() => removeItemFormCart(id)}>
                         <TrashIcon/>
                     </button>
                 </div>

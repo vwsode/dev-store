@@ -22,6 +22,10 @@
     gap: 20px;
     width: 456px;
     flex-shrink: 0;
+
+    position: sticky;
+    top: 30px ;
+    height: max-content;
   }
 
   &__titles {
@@ -41,6 +45,13 @@
   }
 
   &__text {
+  }
+
+  &__description {
+    font-size: 16px;
+    margin: 12px 0;
+    color: var(--gray-200);
+    line-height: 24px;
   }
 
   &__price {

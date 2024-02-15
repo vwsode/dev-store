@@ -1,67 +1,65 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import type {CartItem, Product} from "../../types/types";
+import {addToCart as addToCartApi, removeFromCart as removeFromCartApi} from "../../api/productApi.ts";
 
-export const fetchCart = createAsyncThunk(
+
+export const fetchCartItems = createAsyncThunk(
     'cart/fetchCart',
     async () => {
         return new Promise((r) => setTimeout(r, 2000));
     }
 )
 
+export const addToCart = createAsyncThunk(
+    "cart/addToCart",
+    async (product: Product, {dispatch}) => {
+        await addToCartApi(product);
+        dispatch(fetchCartItems());
+    }
+)
+
+export const removeFromCart = createAsyncThunk(
+    "cart/removeFromCart",
+    async (itemId: number, {dispatch}) => {
+        await removeFromCartApi(itemId);
+        dispatch(fetchCartItems());
+    }
+)
+
 interface CartState {
-    cart: [];
+    cart: CartItem[];
     loading: boolean;
+    totalCount: number;
+    totalPrice: number;
 }
 
 const initialState: CartState = {
     cart: [],
+    totalCount: 0,
+    totalPrice: 0,
     loading: false,
 };
 
 export const cartSlice = createSlice({
     initialState,
-    name: 'cart',
-    reducers: {
-        addToCart: (state, action) => {
-            const itemInCart = state.cart.find(item => item.id === action.payload.id);
-
-            if (itemInCart) {
-                // ...
-            } else {
-                state.cart.push({...action.payload, quantity: 1});
-            }
-        },
-        removeFromCart: (state, action) => {
-            state.cart = state.cart.filter(item => item.id != action.payload);
-        },
-        increaseQuantity: (state, action) => {
-            const item = state.cart.find(item => item.id = action.payload);
-            item.quantity++;
-        },
-        decreaseQuantity: (state, action) => {
-            const item = state.cart.find(item => item.id = action.payload);
-
-            if (item.quantity === 1) {
-                item.quantity = 1;
-            } else {
-                item.quantity--;
-            }
-        },
-    },
+    name: "cart",
+    reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(fetchCart.pending, (state) => {
+            .addCase(fetchCartItems.pending, (state) => {
                 state.loading = true;
+                console.log('update')
             })
-            .addCase(fetchCart.fulfilled, (state) => {
+            .addCase(fetchCartItems.fulfilled, (state) => {
                 state.loading = false;
-                console.log('hello')
             })
-            .addCase(fetchCart.rejected, (state) => {
+            .addCase(fetchCartItems.rejected, (state) => {
                 state.loading = false;
+                console.log('update2')
             })
     }
 });
 
 export default cartSlice.reducer;
-export const {addToCart, removeFromCart, increaseQuantity, decreaseQuantity} = cartSlice.actions;
+// export const {removeFromCart, increaseQuantity, decreaseQuantity} = cartSlice.actions;
 
