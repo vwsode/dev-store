@@ -15,6 +15,8 @@ const Cart = () => {
         loadCart();
     }, [])
 
+    // PRIVIET DENIS
+
     return (
         <section className='cart'>
             <Container size="sm">
