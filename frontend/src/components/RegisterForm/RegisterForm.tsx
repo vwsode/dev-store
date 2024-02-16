@@ -9,7 +9,7 @@ import {ROUTES} from "../../config/routes.ts";
 import {schema} from "../../utils/validationSchemas/registerSchema.ts";
 
 import * as S from './RegisterForm.styles.ts';
-import NikeLogo from "../../assets/icons/nike-logo.svg?react";
+import NikeLogo from '../../assets/icons/nike-logo.svg?react';
 
 const RegisterForm = () => {
     const formik = useFormik({
@@ -21,14 +21,20 @@ const RegisterForm = () => {
             lastName: '',
             dateOfBirth: '',
         },
-        validateOnBlur: true,
+        validateOnChange: true,
         validationSchema: schema,
         onSubmit: (values) => {
+            console.log(values);
             formik.resetForm();
         }
     });
 
-    const {handleSubmit, values, handleChange, errors} = formik;
+    const {
+        handleSubmit,
+        values,
+        handleChange,
+        errors
+    } = formik;
 
     return (
         <S.Wrapper>

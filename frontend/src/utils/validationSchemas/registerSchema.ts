@@ -11,7 +11,7 @@ export const schema = yup.object().shape({
         .required('Required field'),
     confirmPassword: yup.string()
         .required('Required Field')
-        .oneOf([yup.ref('password'), null], 'Passwords must match'),
+        .oneOf([yup.ref('password'), ''], 'Passwords must match'),
     firstName: yup.string()
         .min(2, 'Firstname is too short - should be 4 chars minimum.')
         .required('Required field'),
