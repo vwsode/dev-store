@@ -22,6 +22,7 @@ const LoginForm = () => {
 
         validationSchema: schema,
         onSubmit: (values) => {
+            console.log(values);
             formik.resetForm();
         }
     });
