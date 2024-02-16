@@ -7,7 +7,7 @@ class ProductListSerializer(serializers.ModelSerializer):
     color = serializers.SlugRelatedField(slug_field='name', read_only=True, many=True)
     class Meta: 
         model = Product 
-        fields = ('name', 'category', 'main_image', 'color', 'price', 'sale_price')
+        fields = ('id', 'name', 'category', 'main_image', 'color', 'price', 'sale_price')
 
 
 class ProductShotsSerializer(serializers.ModelSerializer):

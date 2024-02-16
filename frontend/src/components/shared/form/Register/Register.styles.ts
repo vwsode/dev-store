@@ -6,14 +6,11 @@ export const Wrapper = styled.section`
   margin: 0 auto;
 `;
 export const Form = styled.form`
-
   display: flex;
   flex-direction: column;
   gap: 30px;
 `;
-export const FormActions = styled.div`
-  
-`;
+export const FormActions = styled.div``;
 export const FormPolicy = styled.div`
   color: var(--gray-800);
   font-size: 14px;
@@ -63,4 +60,3 @@ export const Top = styled.div`
   gap: 28px;
   padding: 24px;
 `;
-

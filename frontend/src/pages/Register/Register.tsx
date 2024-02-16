@@ -1,10 +1,10 @@
-import Container from "../../components/Container/Container.tsx";
-import RegisterForm from "../../components/RegisterForm/RegisterForm.tsx";
+import Container from "../../components/shared/ui/Container/Container.tsx";
+import { Register as RegisterForm } from "../../components/shared/form";
 
 const Register = () => (
-    <Container size="sm">
-        <RegisterForm/>
-    </Container>
+  <Container size="sm">
+    <RegisterForm />
+  </Container>
 );
 
 export default Register;

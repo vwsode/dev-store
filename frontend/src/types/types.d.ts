@@ -1,10 +1,26 @@
 export type Product = {
-    id: number;
-    title: string;
-    price: number;
-    description: string;
-    category: Category;
-    images: string[];
+    id: number
+    category: string
+    color: string[]
+    size: number[]
+    reviews: Review[]
+    images: Image[]
+    name: string
+    price: number
+    sale_price: number
+    description: string
+    main_image: string
+    slug: string
+}
+
+export interface Review {
+    name: string
+    text: string
+}
+
+export interface Image {
+    alt: string
+    image: string
 }
 
 export type CartItem = Product & {

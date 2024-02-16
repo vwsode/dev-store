@@ -1,36 +1,24 @@
-import ProductItem from "../../components/ProductItem/ProductItem.tsx";
-import Container from "../../components/Container/Container.tsx";
+import { useEffect } from "react";
 
-import './Catalog.scss';
+import Container from "../../components/shared/ui/Container/Container.tsx";
+import { Grid } from "../../components/product/index.ts";
+
 import useProducts from "../../hooks/useProducts.ts";
-import {useEffect} from "react";
 
 const Catalog = () => {
-    const {products, setProducts} = useProducts();
+  const { products, setProducts } = useProducts();
 
-    useEffect(() => {
-        setProducts();
-    }, []);
+  useEffect(() => {
+    setProducts();
+  }, []);
 
-    return (
-        <div>
-            <Container>
-                <div className="catalog-grid">
-                    {products.map((item) => (
-                        <ProductItem
-                            key={item.id}
-                            id={item.id}
-                            title={item.title}
-                            price={item.price}
-                            description={item.description}
-                            category={item.category}
-                            images={item.images}
-                        />
-                    ))}
-                </div>
-            </Container>
-        </div>
-    );
-}
+  return (
+    <div>
+      <Container>
+        <Grid products={products} />
+      </Container>
+    </div>
+  );
+};
 
 export default Catalog;
