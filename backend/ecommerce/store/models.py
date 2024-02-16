@@ -7,7 +7,7 @@ class Category(models.Model):
 
     name = models.CharField(max_length=255)
     description = models.TextField(null=True, blank=True)
-    slug = models.SlugField(max_length=50, unique=True, default="a")
+    slug = models.SlugField(max_length=50, unique=True)
 
     def __str__(self):
         return self.name
@@ -38,7 +38,7 @@ class Product(models.Model):
     price = models.FloatField(null=False, blank=False)
     sale_price = models.FloatField(null=True, blank=True, default=0)
     description = models.TextField()
-    image = models.ImageField(upload_to=f"products/")
+    main_image = models.ImageField(upload_to='products/', null=True, blank=True)
     slug = models.SlugField(max_length=100, unique=True)
 
     def __str__(self):
@@ -49,7 +49,8 @@ class ProductShots(models.Model):
     class Meta:
         verbose_name_plural = "Product shots"
 
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    alt = models.CharField(max_length=100)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to=f"products/")
 
     def __str__(self):
