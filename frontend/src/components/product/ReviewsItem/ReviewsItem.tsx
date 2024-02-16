@@ -1,23 +1,40 @@
 import * as S from "./Reviews.styles.ts";
+import { FC } from "react";
 
-const ReviewsItem = () => {
+interface IReviewsItem {
+  title: string;
+  rating: number;
+  name: string;
+  description: string;
+}
+
+const ReviewsItem: FC<IReviewsItem> = ({
+  title,
+  rating,
+  name,
+  description,
+}) => {
   return (
     <S.Review>
-      <S.Title>Best Buy!</S.Title>
+      <S.Title>{title}</S.Title>
       <S.Rating>
-        <S.Star />
-        <S.Star />
-        <S.Star />
-        <S.Star />
-        <S.Star />
+        {Array(rating)
+          .fill("")
+          .map(() => (
+            <S.Star variant="default" key={window.crypto.randomUUID()} />
+          ))}
+        {Array(5)
+          .fill("")
+          .map((_, idx) => {
+            if (idx >= rating) {
+              return (
+                <S.Star variant="secondary" key={window.crypto.randomUUID()} />
+              );
+            }
+          })}
       </S.Rating>
-      <S.Name>Nikki - Nov 29, 2023</S.Name>
-      <S.Description>
-        [This review was collected as part of a promotion.] My son loves these
-        gloves. They’re well made and of good quality.
-      </S.Description>
-      <p></p>
-      <p></p>
+      <S.Name>{name}</S.Name>
+      <S.Description>{description}</S.Description>
     </S.Review>
   );
 };

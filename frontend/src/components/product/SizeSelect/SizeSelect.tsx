@@ -14,7 +14,7 @@ const SizeSelect = ({ sizes, name }: ISizeSelect) => {
       </S.Legend>
       <S.Grid>
         {sizes.map((size) => (
-          <S.Field>
+          <S.Field key={size}>
             <S.FieldInput name={name} type="radio" />
             <S.FieldText>{size}</S.FieldText>
           </S.Field>

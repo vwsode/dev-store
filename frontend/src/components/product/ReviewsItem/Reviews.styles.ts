@@ -5,7 +5,7 @@ export const Review = styled.div`
 `;
 export const Title = styled.h4`
   font-weight: 600;
-  font-size: 16px;
+  font-size: 18px;
   margin-bottom: 4px;
 `;
 export const Name = styled.p`
@@ -18,10 +18,15 @@ export const Name = styled.p`
 export const Rating = styled.div`
   display: inline-block;
 `;
-export const Star = styled.span`
+export const Star = styled.span<{
+  variant: "secondary" | "default";
+}>`
   &::before {
     content: "★";
-    font-size: 18px;
+    font-size: 22px;
+
+    color: ${(props) =>
+      props.variant !== "secondary" ? "var(--gray-200)" : "var(--gray-600)"};
   }
 `;
 export const Description = styled.p`
