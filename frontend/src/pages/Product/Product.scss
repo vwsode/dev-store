@@ -9,6 +9,7 @@
     grid-template-columns: repeat(1, 1fr);
     gap: 12px;
     height: max-content;
+    min-width: 632px;
 
     img {
       width: 100%;
@@ -24,8 +25,8 @@
     width: 376px;
     flex-shrink: 0;
 
-    position: sticky;
-    top: 70px;
+    //position: sticky;
+    //top: 70px;
     height: max-content;
   }
 

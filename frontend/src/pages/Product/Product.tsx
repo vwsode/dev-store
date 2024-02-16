@@ -9,6 +9,7 @@ import Button from "../../components/shared/ui/Button/Button.tsx";
 import SizeSelect from "../../components/product/SizeSelect/SizeSelect.tsx";
 
 import "./Product.scss";
+import { Reviews } from "../../components/product";
 
 const Product = () => {
   const { id } = useParams();
@@ -44,11 +45,11 @@ const Product = () => {
           </div>
           <div className="product__text">
             <span className="product__price">${product.price}</span>
-            {product.sale_price && (
+            {!!product.sale_price && (
               <span className="product__sale-price">${product.sale_price}</span>
             )}
           </div>
-          <SizeSelect />
+          <SizeSelect sizes={product.size} name="size" />
           <div className="product__actions">
             {isItemInCart ? (
               <Button variant="dark" onClick={removeCartHandler}>
@@ -62,6 +63,7 @@ const Product = () => {
             <Button variant="light">Favorite</Button>
           </div>
           <p className="product__description">{product.description}</p>
+          <Reviews />
         </div>
       </section>
     </Container>
