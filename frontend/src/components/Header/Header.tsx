@@ -1,5 +1,3 @@
-import {NavLink} from "react-router-dom";
-
 import useCart from "../../hooks/useCart.ts";
 
 import Container from "../Container/Container.tsx";
@@ -12,82 +10,83 @@ import JordanLogo from "../../assets/icons/jordan-logo.svg?react";
 import CartIcon from "../../assets/icons/cart.svg?react";
 import FavIcon from "../../assets/icons/favorite.svg?react";
 
-import './Header.scss';
+
+import * as S from './Header.styles.ts';
 
 const Header = () => {
     const {cart} = useCart();
 
     return (
         <>
-            <div className='header-top'>
+            <S.HeaderTop>
                 <Container>
-                    <div className='header-top__wrapper'>
-                        <div className="header-top__logo">
+                    <S.HeaderTopWrapper>
+                        <S.HeaderTopLogo to={ROUTES.CATALOG}>
                             <JordanLogo/>
-                        </div>
-                        <nav className='header-top__nav'>
-                            <ul className="header-top__nav-list">
-                                <li className="header-top__nav-item">
-                                    <NavLink className='header-top__nav-link' to={ROUTES.CATALOG}>Find a Store</NavLink>
-                                </li>
+                        </S.HeaderTopLogo>
+                        <S.HeaderTopNav>
+                            <S.HeaderTopNavList>
+                                <S.HeaderTopNavItem>
+                                    <S.HeaderTopNavLink to={ROUTES.CATALOG}>Find a Store</S.HeaderTopNavLink>
+                                </S.HeaderTopNavItem>
                                 |
-                                <li className="header-top__nav-item">
-                                    <NavLink className='header-top__nav-link' to={ROUTES.CATALOG}>Help</NavLink>
-                                </li>
+                                <S.HeaderTopNavItem>
+                                    <S.HeaderTopNavLink to={ROUTES.CATALOG}>Help</S.HeaderTopNavLink>
+                                </S.HeaderTopNavItem>
                                 |
-                                <li className="header-top__nav-item">
-                                    <NavLink className='header-top__nav-link' to={ROUTES.REGISTER}>Join Us</NavLink>
-                                </li>
+                                <S.HeaderTopNavItem>
+                                    <S.HeaderTopNavLink to={ROUTES.REGISTER}>Join Us</S.HeaderTopNavLink>
+                                </S.HeaderTopNavItem>
                                 |
-                                <li className="header-top__nav-item">
-                                    <NavLink className='header-top__nav-link' to={ROUTES.LOGIN}>Sign In</NavLink>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
+                                <S.HeaderTopNavItem>
+                                    <S.HeaderTopNavLink to={ROUTES.LOGIN}>Sign In</S.HeaderTopNavLink>
+                                </S.HeaderTopNavItem>
+                            </S.HeaderTopNavList>
+                        </S.HeaderTopNav>
+                    </S.HeaderTopWrapper>
                 </Container>
-            </div>
-            <header className='header'>
+            </S.HeaderTop>
+            <S.Header>
                 <Container>
-                    <div className='header__wrapper'>
-                        <NavLink to={ROUTES.MAIN} className="header__logo">
+                    <S.HeaderWrapper>
+                        <S.HeaderLogo to={ROUTES.MAIN}>
                             <NikeLogo/>
-                        </NavLink>
-                        <nav className='header__nav nav'>
-                            <ul className='nav__list'>
-                                <li className='nav__item'>
-                                    <NavLink className='nav__link' to={ROUTES.CATALOG}>New & Featured</NavLink>
-                                </li>
-                                <li className='nav__item'>
-                                    <NavLink className='nav__link' to={ROUTES.CATALOG}>Men</NavLink>
-                                </li>
-                                <li className='nav__item'>
-                                    <NavLink className='nav__link' to={ROUTES.CATALOG}>Women</NavLink>
-                                </li>
-                                <li className='nav__item'>
-                                    <NavLink className='nav__link' to={ROUTES.CATALOG}>Kids</NavLink>
-                                </li>
-                                <li className='nav__item'>
-                                    <NavLink className='nav__link' to={ROUTES.CATALOG}>Sale</NavLink>
-                                </li>
-                                <li className='nav__item'>
-                                    <NavLink className='nav__link' to={ROUTES.CATALOG}>SNKERS</NavLink>
-                                </li>
-                            </ul>
-                        </nav>
-                        <div className="header__btns">
+                        </S.HeaderLogo>
+                        <S.Navigation>
+                            <S.NavigationList>
+                                <S.NavigationItem>
+                                    <S.NavigationLink to={ROUTES.CATALOG}>New & Featured</S.NavigationLink>
+                                </S.NavigationItem>
+                                <S.NavigationItem>
+                                    <S.NavigationLink to={ROUTES.CATALOG}>Men</S.NavigationLink>
+                                </S.NavigationItem>
+                                <S.NavigationItem>
+                                    <S.NavigationLink to={ROUTES.CATALOG}>Women</S.NavigationLink>
+                                </S.NavigationItem>
+                                <S.NavigationItem>
+                                    <S.NavigationLink to={ROUTES.CATALOG}>Kids</S.NavigationLink>
+                                </S.NavigationItem>
+                                <S.NavigationItem>
+                                    <S.NavigationLink to={ROUTES.CATALOG}>Sale</S.NavigationLink>
+                                </S.NavigationItem>
+                                <S.NavigationItem>
+                                    <S.NavigationLink to={ROUTES.CATALOG}>SNKERS</S.NavigationLink>
+                                </S.NavigationItem>
+                            </S.NavigationList>
+                        </S.Navigation>
+                        <S.HeaderButtons>
                             <Search placeholder="Search"/>
-                            <NavLink className='header-action-btn' to={ROUTES.FAVORITES}>
+                            <S.ActionBtn to={ROUTES.FAVORITES}>
                                 <FavIcon/>
-                            </NavLink>
-                            <NavLink className='header-action-btn' to={ROUTES.CART}>
+                            </S.ActionBtn>
+                            <S.ActionBtn to={ROUTES.CART}>
                                 <CartIcon/>
-                                {cart.length ? <span className='header-action-btn__badge'>{cart.length}</span> : ''}
-                            </NavLink>
-                        </div>
-                    </div>
+                                {cart.length ? <S.ActionBtnBadge>{cart.length}</S.ActionBtnBadge> : ''}
+                            </S.ActionBtn>
+                        </S.HeaderButtons>
+                    </S.HeaderWrapper>
                 </Container>
-            </header>
+            </S.Header>
         </>
     );
 };

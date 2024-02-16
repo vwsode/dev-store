@@ -1,12 +1,14 @@
+import {useEffect} from "react";
+import {useParams} from "react-router";
+
+import useProducts from "../../hooks/useProducts.ts";
+import useCart from "../../hooks/useCart.ts";
+
 import Container from "../../components/Container/Container.tsx";
 import Button from "../../components/Button/Button.tsx";
+import SizeGrid from "../../components/SizeGrid/SizeGrid.tsx";
 
 import './Product.scss';
-import {useParams} from "react-router";
-import useProducts from "../../hooks/useProducts.ts";
-import {useEffect} from "react";
-import useCart from "../../hooks/useCart.ts";
-import SizeGrid from "../../components/SizeGrid/SizeGrid.tsx";
 
 const Product = () => {
     const {id} = useParams();
