@@ -1,5 +1,7 @@
 from django.db import models
-
+from django.contrib.auth.models import User
+from datetime import datetime
+from django.utils import timezone
 
 class Category(models.Model):
     class Meta:
@@ -57,11 +59,20 @@ class ProductShots(models.Model):
         return f"{self.product.name}"
 
 
+# class ReviewStar(models.Model):
+#     value = models.SmallIntegerField(default=0)
+
+#     def __str__(self):
+#         return str(self.value)
+
 class Review(models.Model):
-    email = models.EmailField()
-    name = models.CharField(max_length=30)
+    username = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='username')
+    title = models.CharField(max_length=100)
     text = models.TextField(max_length=500)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
+    star = models.SmallIntegerField(default=3)
+    time_created = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return f"{self.name} - {self.product.name}"
+        return f"{self.product.name}: {self.username} - {self.title}"
+    
