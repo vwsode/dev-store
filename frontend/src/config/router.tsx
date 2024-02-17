@@ -1,16 +1,18 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import Layout from "../components/layout/Layout/Layout.tsx";
+import ProtectedRoute from "../components/layout/ProtectedRoute/ProtectedRoute.tsx";
 
 import Catalog from "../pages/Catalog/Catalog.tsx";
 import Product from "../pages/Product/Product.tsx";
 import Home from "../pages/Home/Home.tsx";
 import Cart from "../pages/Cart/Cart.tsx";
 import Favorite from "../pages/Favorite/Favorite.tsx";
-
-import { ROUTES } from "./routes.ts";
 import Login from "../pages/Login/Login.tsx";
 import Register from "../pages/Register/Register.tsx";
+import Profile from "../pages/Profile.tsx";
+
+import { ROUTES } from "./routes.ts";
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +38,10 @@ export const router = createBrowserRouter([
       {
         path: ROUTES.FAVORITES,
         element: <Favorite />,
+      },
+      {
+        path: ROUTES.PROFILE,
+        element: <ProtectedRoute element={<Profile />} />,
       },
       {
         path: ROUTES.CATALOG,

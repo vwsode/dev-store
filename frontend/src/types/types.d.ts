@@ -38,13 +38,8 @@ type Category = {
   updatedAt?: string;
 };
 
-type UserRole = "customer" | "manager";
-
-export type User = {
-  id: number;
+interface User {
+  username: string;
   email: string;
   password: string;
-  name: string;
-  role: UserRole;
-  avatar: string;
-};
+}

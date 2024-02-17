@@ -1,4 +1,5 @@
 import useCart from "../../../hooks/useCart.ts";
+import useUser from "../../../hooks/useUser.ts";
 
 import Container from "../../shared/ui/Container/Container.tsx";
 import Search from "../../shared/ui/Search/Search.tsx";
@@ -14,6 +15,7 @@ import * as S from "./Header.styles.ts";
 
 const Header = () => {
   const { cart } = useCart();
+  const { user } = useUser();
 
   return (
     <>
@@ -37,17 +39,29 @@ const Header = () => {
                   </S.HeaderTopNavLink>
                 </S.HeaderTopNavItem>
                 |
-                <S.HeaderTopNavItem>
-                  <S.HeaderTopNavLink to={ROUTES.REGISTER}>
-                    Join Us
-                  </S.HeaderTopNavLink>
-                </S.HeaderTopNavItem>
-                |
-                <S.HeaderTopNavItem>
-                  <S.HeaderTopNavLink to={ROUTES.LOGIN}>
-                    Sign In
-                  </S.HeaderTopNavLink>
-                </S.HeaderTopNavItem>
+                {user ? (
+                  <>
+                    <S.HeaderTopNavItem>
+                      <S.HeaderTopNavLink to={ROUTES.PROFILE}>
+                        Hi, {user.username}
+                      </S.HeaderTopNavLink>
+                    </S.HeaderTopNavItem>
+                  </>
+                ) : (
+                  <>
+                    <S.HeaderTopNavItem>
+                      <S.HeaderTopNavLink to={ROUTES.REGISTER}>
+                        Join Us
+                      </S.HeaderTopNavLink>
+                    </S.HeaderTopNavItem>
+                    |
+                    <S.HeaderTopNavItem>
+                      <S.HeaderTopNavLink to={ROUTES.LOGIN}>
+                        Sign In
+                      </S.HeaderTopNavLink>
+                    </S.HeaderTopNavItem>
+                  </>
+                )}
               </S.HeaderTopNavList>
             </S.HeaderTopNav>
           </S.HeaderTopWrapper>

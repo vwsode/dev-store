@@ -1,10 +1,11 @@
 import { useFormik } from "formik";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import TextField from "../../ui/TextField/TextField.tsx";
 import Checkbox from "../../ui/Checkbox/Checkbox.tsx";
 import Button from "../../ui/Button/Button.tsx";
 
+import useUser from "../../../../hooks/useUser.ts";
 import { ROUTES } from "../../../../config/routes.ts";
 import { schema } from "../../../../utils/validationSchemas/registerSchema.ts";
 
@@ -12,6 +13,9 @@ import * as S from "./Register.styles.ts";
 // import NikeLogo from "../../assets/icons/nike-logo.svg?react";
 
 const RegisterForm = () => {
+  const { register } = useUser();
+  const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -24,7 +28,15 @@ const RegisterForm = () => {
     validateOnChange: true,
     validationSchema: schema,
     onSubmit: (values) => {
-      console.log(values);
+      register({
+        password: values.password,
+        email: values.email,
+        username: values.firstName,
+      });
+
+      // Исправить редирект
+      navigate(ROUTES.PROFILE);
+
       formik.resetForm();
     },
   });
