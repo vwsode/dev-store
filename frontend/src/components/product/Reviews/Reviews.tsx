@@ -1,8 +1,11 @@
+import { FC } from "react";
 import ReviewsItem from "../ReviewsItem/ReviewsItem.tsx";
 
 import * as S from "./Reviews.styles.ts";
 
-const Reviews = () => {
+interface IReviews {}
+
+const Reviews: FC<IReviews> = () => {
   return (
     <S.Details>
       <S.Summary>
