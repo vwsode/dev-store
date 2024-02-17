@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
-export const Review = styled.div`
-  margin-bottom: 40px;
-`;
+export const Review = styled.div``;
 export const Title = styled.h4`
   font-weight: 600;
   font-size: 18px;

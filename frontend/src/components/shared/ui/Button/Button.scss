@@ -64,3 +64,21 @@
 .btn-not-rounded {
   border-radius: 4px;
 }
+
+.btn-cta {
+  border-bottom: 1px solid var(--gray-100);
+  color: var(--gray-100);
+  font-weight: 600;
+  font-size: 16px;
+  background: transparent;
+  cursor: pointer;
+
+  width: max-content;
+
+  &:hover {
+    border-color: var(--gray-300);
+    color: var(--gray-300);
+  }
+
+  //font: 500 1rem/1.5 'Helvetica Now Text Medium',Helvetica,Arial,sans-serif;
+}

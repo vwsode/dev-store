@@ -9,7 +9,7 @@ import Button from "../../components/shared/ui/Button/Button.tsx";
 import SizeSelect from "../../components/product/SizeSelect/SizeSelect.tsx";
 
 import "./Product.scss";
-import { Reviews } from "../../components/product";
+import { Reviews } from "../../components/reviews";
 
 const Product = () => {
   const { id } = useParams();
@@ -63,7 +63,12 @@ const Product = () => {
             <Button variant="light">Favorite</Button>
           </div>
           <p className="product__description">{product.description}</p>
-          <Reviews />
+
+          <Reviews
+            productName={product.name}
+            reviews={product.reviews}
+            totalRating={3}
+          />
         </div>
       </section>
     </Container>

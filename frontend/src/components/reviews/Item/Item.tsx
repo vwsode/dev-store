@@ -1,19 +1,16 @@
-import * as S from "./Reviews.styles.ts";
+import * as S from "./Item.styles.ts";
 import { FC } from "react";
+import { convertDateToLocalString } from "../../../utils/convert/date.ts";
 
 interface IReviewsItem {
   title: string;
   rating: number;
   name: string;
   description: string;
+  date: string;
 }
 
-const ReviewsItem: FC<IReviewsItem> = ({
-  title,
-  rating,
-  name,
-  description,
-}) => {
+const Item: FC<IReviewsItem> = ({ title, rating, name, description, date }) => {
   return (
     <S.Review>
       <S.Title>{title}</S.Title>
@@ -33,10 +30,12 @@ const ReviewsItem: FC<IReviewsItem> = ({
             }
           })}
       </S.Rating>
-      <S.Name>{name}</S.Name>
+      <S.Name>
+        {name} - {convertDateToLocalString(date)}
+      </S.Name>
       <S.Description>{description}</S.Description>
     </S.Review>
   );
 };
 
-export default ReviewsItem;
+export default Item;

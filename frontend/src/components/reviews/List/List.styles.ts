@@ -18,10 +18,14 @@ export const Title = styled.h3`
 export const Rating = styled.div`
   margin-right: 24px;
 `;
-export const Star = styled.span`
+export const Star = styled.span<{
+  variant: "secondary" | "default";
+}>`
   &::before {
     content: "★";
     font-size: 20px;
+    color: ${(props) =>
+      props.variant !== "secondary" ? "var(--gray-200)" : "var(--gray-600)"};
   }
 
   margin-right: 4px;
@@ -54,4 +58,14 @@ export const Summary = styled.summary`
 `;
 export const Content = styled.div`
   padding: 20px 0 40px 0;
+  display: flex;
+  gap: 40px;
+  flex-direction: column;
+`;
+
+export const Description = styled.p`
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--gray-100);
+  line-height: 26px;
 `;
