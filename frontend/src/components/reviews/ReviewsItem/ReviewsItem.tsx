@@ -1,4 +1,4 @@
-import * as S from "./Item.styles.ts";
+import * as S from "./ReviewsItem.styles.ts";
 import { FC } from "react";
 import { convertDateToLocalString } from "../../../utils/convert/date.ts";
 

@@ -1,18 +1,22 @@
 import './TextField.scss';
-import {InputHTMLAttributes} from "react";
+import { InputHTMLAttributes } from 'react';
 
 interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
-    hint?: string;
+    hintText?: string;
     isError?: boolean;
 }
 
-const TextField = ({isError = false, hint = '', ...props}: TextFieldProps) => {
+const TextField = ({
+    isError = false,
+    hintText = '',
+    ...props
+}: TextFieldProps) => {
     return (
         <label className={`text-field ${isError ? 'text-field_error' : ''}`}>
-            <input className="text-field__input" {...props}/>
-            {hint && <span className="text-field__hint">{hint}</span>}
+            <input className="text-field__input" {...props} />
+            {hintText && <span className="text-field__hint">{hintText}</span>}
         </label>
-    )
+    );
 };
 
 export default TextField;
