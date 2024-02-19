@@ -16,6 +16,7 @@ class ProductListView(generics.ListAPIView):
 class ProductDetailView(APIView):
     permission_classes = (IsAuthenticatedOrReadOnly, )
     def get(self, request, pk):
+        print(request.user)
         product = Product.objects.get(pk=pk)
         serializer = ProductDetailSerializer(product, context={'request': request})
         data = serializer.data 
