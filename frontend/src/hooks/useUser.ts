@@ -7,8 +7,8 @@ const useUser = () => {
   const dispatch = useDispatch<AppDispatch>();
   const auth = useSelector((state: RootState) => state.user);
 
-  const register = (user: User) => {
-    dispatch(registerUser(user));
+  const register = async (user: User) => {
+    await dispatch(registerUser(user));
   };
 
   return {

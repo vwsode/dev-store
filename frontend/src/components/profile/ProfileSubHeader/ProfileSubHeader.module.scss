@@ -1,0 +1,27 @@
+.sub-header {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  width: 100%;
+  margin-top: 100px;
+}
+
+.image-wrap {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background-color: rgb(229, 229, 229);
+  //background-image: url((unknown));
+  display: block;
+}
+
+.image {
+}
+
+.text {
+}
+
+.title {
+  font: 500 2rem/1.2 'SF Pro Display', Helvetica, Arial, sans-serif;
+}
+

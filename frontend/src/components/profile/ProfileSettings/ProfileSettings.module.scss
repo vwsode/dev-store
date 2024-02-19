@@ -1,0 +1,21 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.settings {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  gap: 20px;
+}
+
+.title {
+  font: 500 1.8rem/1.1 'SF Pro Display', Helvetica, Arial, sans-serif;
+
+}
+
+.content {
+
+}

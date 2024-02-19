@@ -27,17 +27,22 @@ const RegisterForm = () => {
     },
     validateOnChange: true,
     validationSchema: schema,
-    onSubmit: (values) => {
-      register({
-        password: values.password,
-        email: values.email,
-        username: values.firstName,
-      });
+    onSubmit: async (values) => {
+      try {
+        await register({
+          password: values.password,
+          email: values.email,
+          username: values.firstName,
+        });
 
-      // Исправить редирект
-      navigate(ROUTES.PROFILE);
+        // Исправить редирект
+        navigate(ROUTES.PROFILE);
 
-      formik.resetForm();
+        formik.resetForm();
+      } catch (error) {
+        // Обработка ошибок, если register завершился с ошибкой
+        console.error("Registration failed:", error);
+      }
     },
   });
 

@@ -31,8 +31,10 @@
     border-radius: 4px;
     appearance: none;
 
+
+    color: var(--gray-200);
+
     &:not(&:placeholder-shown) {
-      color: var(--gray-200);
     }
 
     &::-webkit-inner-spin-button,
@@ -53,6 +55,19 @@
 
     &::placeholder {
       color: var(--gray-800);
+    }
+
+
+    &:read-only {
+      background-color: var(--gray-700);
+      border-color: var(--gray-700);
+      color: var(--gray-300);
+      cursor: default;
+
+      &:hover, &:focus {
+        border-color: var(--gray-700);
+        background-color: var(--gray-700);
+      }
     }
   }
 

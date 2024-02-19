@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export const HeaderTop = styled.div`
   background-color: var(--gray-700);
@@ -10,14 +10,12 @@ export const HeaderTopWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
-export const HeaderTopLogo = styled(NavLink)`
-
-
-`;
+export const HeaderTopLogo = styled(NavLink)``;
 export const HeaderTopNav = styled.nav``;
 export const HeaderTopNavList = styled.ul`
   list-style: none;
   display: flex;
+  align-items: center;
   gap: 15px;
 `;
 export const HeaderTopNavItem = styled.li`
@@ -25,10 +23,14 @@ export const HeaderTopNavItem = styled.li`
   align-items: center;
 `;
 export const HeaderTopNavLink = styled(NavLink)`
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: 700;
   color: var(--gray-200);
   text-decoration: none;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
@@ -113,7 +115,6 @@ export const ActionBtnBadge = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
-
 
   position: absolute;
   top: -2px;

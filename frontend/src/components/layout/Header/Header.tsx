@@ -10,6 +10,7 @@ import NikeLogo from "../../../assets/icons/nike-logo.svg?react";
 import JordanLogo from "../../../assets/icons/jordan-logo.svg?react";
 import CartIcon from "../../../assets/icons/cart.svg?react";
 import FavIcon from "../../../assets/icons/favorite.svg?react";
+import UserIcon from "../../../assets/icons/user.svg?react";
 
 import * as S from "./Header.styles.ts";
 
@@ -44,6 +45,7 @@ const Header = () => {
                     <S.HeaderTopNavItem>
                       <S.HeaderTopNavLink to={ROUTES.PROFILE}>
                         Hi, {user.username}
+                        <UserIcon />
                       </S.HeaderTopNavLink>
                     </S.HeaderTopNavItem>
                   </>
