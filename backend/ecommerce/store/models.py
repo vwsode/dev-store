@@ -1,13 +1,14 @@
 from django.db import models
-from django.contrib.auth.models import User
+from auth_user.models import User
 from datetime import datetime
 from django.utils import timezone
+
 
 class Category(models.Model):
     class Meta:
         verbose_name_plural = "Categories"
 
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
     description = models.TextField(null=True, blank=True)
     slug = models.SlugField(max_length=50, unique=True)
 
@@ -56,17 +57,11 @@ class ProductShots(models.Model):
     image = models.ImageField(upload_to=f"products/")
 
     def __str__(self):
-        return f"{self.product.name}"
+        return f"{self.product.name} - {self.alt}"
 
-
-# class ReviewStar(models.Model):
-#     value = models.SmallIntegerField(default=0)
-
-#     def __str__(self):
-#         return str(self.value)
 
 class Review(models.Model):
-    username = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='username')
+    username = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     text = models.TextField(max_length=500)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')

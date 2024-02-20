@@ -40,9 +40,11 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "store",
+    'auth_user',
     'corsheaders',
+
     'djoser',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -58,13 +60,11 @@ MIDDLEWARE = [
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny'
+        'rest_framework.permissions.AllowAny',
     ],
 
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
     ],
 
     'DATETIME_FORMAT': "%d/%m/%Y %H:%M",
@@ -153,3 +153,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+AUTH_USER_MODEL = 'auth_user.User'
