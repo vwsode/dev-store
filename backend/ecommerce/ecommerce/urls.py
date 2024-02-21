@@ -7,7 +7,7 @@ from . import settings
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('api/products/', include('store.urls')),
+    path('api/', include('store.urls')),
     path('api/auth/', include('auth_user.urls')),
 ]
 

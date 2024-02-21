@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Product, Review, ProductShots
+from .models import Product, Review, ProductShots, Cart, CartItem
 from django.contrib.auth import get_user_model
 from auth_user.models import User
 
@@ -13,7 +13,7 @@ class ProductShotsSerializer(serializers.ModelSerializer):
 class UserDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = User 
-        fields = ('first_name', 'last_name')
+        fields = ('first_name', 'last_name', 'id')
 
 
 class ReviewSerializer(serializers.ModelSerializer):
@@ -39,4 +39,25 @@ class ProductDetailSerializer(serializers.ModelSerializer):
     images = ProductShotsSerializer(many=True)
     class Meta:
         model = Product
+        fields = '__all__'
+
+
+class ProductCartSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = Product 
+        fields = ('name', 'price', 'sale_price', 'main_image')
+
+
+class CartItemSerializer(serializers.ModelSerializer):
+    product = ProductCartSerializer(read_only=True)
+    class Meta:
+        model = CartItem
+        fields = '__all__'
+
+
+class CartSerializer(serializers.ModelSerializer):
+    items = CartItemSerializer(many=True)
+    user = UserDataSerializer(read_only=True)
+    class Meta:
+        model = Cart
         fields = '__all__'
