@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import Item from '../ReviewsItem/ReviewsItem.tsx';
+import ReviewsItem from '../ReviewsItem/ReviewsItem.tsx';
 
 import { Review } from '../../../types/types';
 
@@ -64,9 +64,9 @@ const ReviewsList: FC<IReviews> = ({ reviews, totalRating, productName }) => {
                 </Button>
 
                 {reviews.map((review) => (
-                    <Item
+                    <ReviewsItem
                         key={window.crypto.randomUUID()}
-                        name={review.username}
+                        name={`${review.username.firstName} ${review.username.lastName}`}
                         date={review.time_created}
                         rating={review.star}
                         title={review.title}

@@ -1,33 +1,37 @@
-import {useDispatch, useSelector} from "react-redux";
-import {AppDispatch, RootState} from "../store/store.ts";
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../store/store.ts';
 import {
     fetchCartItems,
     removeFromCart,
-    addToCart
-} from "../store/slices/cartSlice.ts";
-
-import type {Product} from "../types/types";
+    addToCart,
+} from '../store/slices/cartSlice.ts';
 
 const useCart = () => {
     const dispatch = useDispatch<AppDispatch>();
-    const {
-        cart,
-        loading,
-        totalCount,
-        totalPrice
-    } = useSelector((state: RootState) => state.cart);
+    const { cart, loading, totalCount, totalPrice } = useSelector(
+        (state: RootState) => state.cart,
+    );
+
+    const isItemInCart = (id: number) => {
+        return cart.some((item) => item.id === Number(id));
+    };
 
     const loadCart = () => {
         dispatch(fetchCartItems());
-    }
+    };
 
     const removeItemFormCart = (id: number) => {
         dispatch(removeFromCart(id));
-    }
+    };
 
-    const addItemToCart = (product: Product) => {
-        dispatch(addToCart(product));
-    }
+    const addItemToCart = (id: number, quantity: number) => {
+        dispatch(
+            addToCart({
+                id,
+                quantity,
+            }),
+        );
+    };
 
     return {
         cart,
@@ -37,7 +41,8 @@ const useCart = () => {
         loadCart,
         removeItemFormCart,
         addItemToCart,
-    }
-}
+        isItemInCart,
+    };
+};
 
 export default useCart;

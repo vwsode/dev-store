@@ -1,0 +1,31 @@
+.rating {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.title {
+    font-size: 16px;
+    color: var(--gray-100);
+
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.rating-label {
+    position: relative;
+    cursor: pointer;
+}
+
+.rating-input {
+    appearance: none;
+    position: absolute;
+    opacity: 0;
+    height: 1px;
+    width: 1px;
+
+
+}

@@ -1,25 +1,7 @@
 .label {
     width: 100%;
 
-    &_error {
-        .text-area {
-            border-color: var(--accent);
 
-            &:hover,
-            &:focus {
-                border-color: var(--accent);
-            }
-        }
-
-        .hint {
-            color: var(--accent);
-
-            &:hover,
-            &:focus {
-                color: var(--accent);
-            }
-        }
-    }
 
     .text-area {
         width: 100%;
@@ -79,5 +61,25 @@
     .hint {
         font-size: 12px;
         color: var(--gray-400);
+    }
+
+    &_error {
+        .text-area {
+            border-color: var(--accent);
+
+            &:hover,
+            &:focus {
+                border-color: var(--accent);
+            }
+        }
+
+        .hint {
+            color: var(--accent);
+
+            &:hover,
+            &:focus {
+                color: var(--accent);
+            }
+        }
     }
 }

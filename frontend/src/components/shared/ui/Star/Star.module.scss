@@ -1,0 +1,26 @@
+.star {
+    &::before {
+        content: "★";
+    }
+}
+
+.star-filled {
+    color: var(--gray-200);
+}
+
+.star-default {
+    color: var(--gray-600);
+}
+
+.star-sm {
+    font-size: 22px;
+}
+
+.star-md {
+    font-size: 28px;
+}
+
+.star-lg {
+    font-size: 34px;
+    line-height: 100%;
+}

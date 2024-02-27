@@ -13,7 +13,7 @@ const TextField = ({
 }: TextFieldProps) => {
     return (
         <label className={`text-field ${isError ? 'text-field_error' : ''}`}>
-            <input className="text-field__input" {...props} />
+            <input  className="text-field__input" {...props} />
             {hintText && <span className="text-field__hint">{hintText}</span>}
         </label>
     );
