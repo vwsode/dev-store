@@ -1,7 +1,12 @@
 from django.db import models
-from auth_user.models import User
-from datetime import datetime
 from django.utils import timezone
+from django.contrib.auth import get_user_model
+from django.utils.text import slugify
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+
+
+# PRODUCT
 
 
 class Category(models.Model):
@@ -17,13 +22,10 @@ class Category(models.Model):
 
 
 class ProductSize(models.Model):
-    size_us_women = models.FloatField(null=False, blank=False)
-    size_us_men = models.FloatField(null=False, blank=False)
-    size_uk = models.FloatField(null=False, blank=False)
-    size_eu = models.FloatField(null=False, blank=False)
+    size = models.FloatField(null=False, blank=False)
 
     def __str__(self):
-        return f"{self.size_us_women} - {self.size_us_men} - {self.size_uk} - {self.size_eu}"
+        return str(self.size)
 
 
 class ProductColor(models.Model):
@@ -36,16 +38,30 @@ class ProductColor(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=255)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
-    size = models.ManyToManyField(ProductSize)
-    color = models.ManyToManyField(ProductColor)
-    price = models.FloatField(null=False, blank=False)
-    sale_price = models.FloatField(null=True, blank=True, default=0)
     description = models.TextField()
-    main_image = models.ImageField(upload_to='products/', null=True, blank=True)
-    slug = models.SlugField(max_length=100, unique=True)
+    product_slug = models.SlugField(unique=True, max_length=100, null=True)
 
     def __str__(self):
         return self.name
+
+
+class ProductItem(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    size = models.ManyToManyField(ProductSize)
+    color = models.ManyToManyField(ProductColor)
+    price = models.FloatField()
+    sale_price = models.FloatField(null=True, blank=True, default=0)
+    item_slug = models.SlugField(max_length=100, unique=True, null=True)
+    main_image = models.ImageField()
+
+    def save(self, *args, **kwargs):
+        self.main_image.name = f"products/{self.product.product_slug}/{self.item_slug}/{self.main_image.name}"
+        super(ProductItem, self).save(*args, **kwargs)
+
+    def __str__(self):
+        colors = ", ".join([color.name for color in self.color.all()])
+        return f"{self.product.name} - {colors}"
+
 
 
 class ProductShots(models.Model):
@@ -53,38 +69,55 @@ class ProductShots(models.Model):
         verbose_name_plural = "Product shots"
 
     alt = models.CharField(max_length=100)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to=f"products/")
+    product_item = models.ForeignKey(ProductItem, on_delete=models.CASCADE, related_name="images")
+    image = models.ImageField()
 
     def __str__(self):
-        return f"{self.product.name} - {self.alt}"
+        return f"{self.product_item.product.name} - {self.alt}"
+
+    def save(self, *args, **kwargs):
+        self.image.name = f"products/{self.product_item.product.product_slug}/{self.product_item.item_slug}/{self.image.name}"
+        super(ProductShots, self).save(*args, **kwargs)
+
+
+# REVIEW
 
 
 class Review(models.Model):
-    username = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     text = models.TextField(max_length=500)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="reviews"
+    )
     star = models.SmallIntegerField(default=3)
     time_created = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return f"{self.product.name}: {self.username} - {self.title}"
-    
-    
+        return f"{self.product.name}: {self.user} - {self.title}"
+
+
+# CART
+
+
 class Cart(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
+    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.user.username} Shopping Cart"
-    
+        return f"{self.user.get_username()} Shopping Cart"
+
 
 class CartItem(models.Model):
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items')
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField(default=0)
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name="items")
+    product_item = models.ForeignKey(ProductItem, on_delete=models.CASCADE)
+    qty = models.PositiveIntegerField(default=0)
 
     def __str__(self):
-        return f'{self.product.name} - {self.quantity}'
+        return f"{self.product_item.product.name} - {self.qty}"
+
+    def total_price(self):
+        if self.product_item.sale_price > 0:
+            return self.product_item.sale_price * self.qty
+        else:
+            return self.product_item.price * self.qty

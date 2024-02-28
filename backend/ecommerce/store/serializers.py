@@ -1,63 +1,70 @@
 from rest_framework import serializers
-from .models import Product, Review, ProductShots, Cart, CartItem
+from .models import Product, ProductItem, ProductShots, Review
 from django.contrib.auth import get_user_model
-from auth_user.models import User
+
+
+# PRODUCT LIST
+
+class ProductSerializer(serializers.ModelSerializer):
+    category = serializers.SlugRelatedField(slug_field='name', read_only=True)
+    class Meta:
+        model = Product 
+        fields = ('id', 'name', 'category')
+
+
+class ProductItemSerializer(serializers.ModelSerializer):
+    product = ProductSerializer()
+    class Meta:
+        model = ProductItem
+        fields = ('id', 'product', 'price', 'sale_price', 'main_image', 'item_slug')
+
+
+# PRODUCT DETAIL
 
 
 class ProductShotsSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductShots
-        fields = ('alt', 'image')
+        exclude = ('id', 'product_item')
 
 
-class UserDataSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User 
-        fields = ('first_name', 'last_name', 'id')
+        model = get_user_model()
+        fields = ('first_name', 'last_name')
 
-
-class ReviewSerializer(serializers.ModelSerializer):
-    username = UserDataSerializer(read_only=True)
+class ProductReviewSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
     class Meta:
         model = Review
-        fields = ('username', 'star', 'title', 'text', 'time_created')
+        fields = ('user', 'title', 'text', 'star', 'time_created')
 
 
-class ProductListSerializer(serializers.ModelSerializer):
+class MainProductDetailSerializer(serializers.ModelSerializer):
     category = serializers.SlugRelatedField(slug_field='name', read_only=True)
-    color = serializers.SlugRelatedField(slug_field='name', read_only=True, many=True)
-    class Meta: 
+    reviews = ProductReviewSerializer(many=True)
+    class Meta:
         model = Product 
-        fields = ('id', 'name', 'category', 'main_image', 'color', 'price', 'sale_price')
+        exclude = ('id', )
 
+
+class ProductItemDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductItem
+        exclude = ('product', 'price', 'size', 'color', 'sale_price', 'item_slug')
 
 class ProductDetailSerializer(serializers.ModelSerializer):
-    category = serializers.SlugRelatedField(slug_field='name', read_only=True)
+    product = MainProductDetailSerializer()
     color = serializers.SlugRelatedField(slug_field='name', read_only=True, many=True)
-    size = serializers.SlugRelatedField(slug_field='size_eu', read_only=True, many=True)
-    reviews = ReviewSerializer(many=True)
+    size = serializers.SlugRelatedField(slug_field='size', read_only=True, many=True)
     images = ProductShotsSerializer(many=True)
+    additional_product_items = serializers.SerializerMethodField()
     class Meta:
-        model = Product
+        model = ProductItem 
         fields = '__all__'
 
+    def get_additional_product_items(self, obj):
+        product_items = ProductItem.objects.filter(product=obj.product).exclude(pk=obj.pk)
+        data = ProductItemDetailSerializer(product_items, many=True).data
+        return data
 
-class ProductCartSerializer(serializers.ModelSerializer):
-    class Meta: 
-        model = Product 
-        fields = ('name', 'price', 'sale_price', 'main_image')
-
-
-class CartItemSerializer(serializers.ModelSerializer):
-    product = ProductCartSerializer(read_only=True)
-    class Meta:
-        model = CartItem
-        fields = '__all__'
-
-
-class CartSerializer(serializers.ModelSerializer):
-    items = CartItemSerializer(many=True)
-    user = UserDataSerializer(read_only=True)
-    class Meta:
-        model = Cart
-        fields = '__all__'
