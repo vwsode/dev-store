@@ -1,125 +1,68 @@
-import useCart from "../../../hooks/useCart.ts";
-import useUser from "../../../hooks/useUser.ts";
+import { NavLink } from 'react-router-dom';
 
-import Container from "../../shared/ui/Container/Container.tsx";
-import Search from "../../shared/ui/Search/Search.tsx";
+import useCart from '../../../hooks/useCart.ts';
 
-import { ROUTES } from "../../../config/routes.ts";
+import Container from '../../shared/ui/Container/Container.tsx';
+import Search from '../../shared/ui/Search/Search.tsx';
 
-import NikeLogo from "../../../assets/icons/nike-logo.svg?react";
-import JordanLogo from "../../../assets/icons/jordan-logo.svg?react";
-import CartIcon from "../../../assets/icons/cart.svg?react";
-import FavIcon from "../../../assets/icons/favorite.svg?react";
-import UserIcon from "../../../assets/icons/user.svg?react";
+import { ROUTES } from '../../../config/routes.ts';
+import { HEADER_NAV } from '../../../config/navigation.ts';
 
-import * as S from "./Header.styles.ts";
+import NikeLogo from '../../../assets/icons/nike-logo.svg?react';
+import CartIcon from '../../../assets/icons/cart.svg?react';
+import FavIcon from '../../../assets/icons/favorite.svg?react';
+
+import s from './Header.module.scss';
 
 const Header = () => {
-  const { cart } = useCart();
-  const { user } = useUser();
+    const { cart } = useCart();
 
-  return (
-    <>
-      <S.HeaderTop>
-        <Container>
-          <S.HeaderTopWrapper>
-            <S.HeaderTopLogo to={ROUTES.CATALOG}>
-              <JordanLogo />
-            </S.HeaderTopLogo>
-            <S.HeaderTopNav>
-              <S.HeaderTopNavList>
-                <S.HeaderTopNavItem>
-                  <S.HeaderTopNavLink to={ROUTES.CATALOG}>
-                    Find a Store
-                  </S.HeaderTopNavLink>
-                </S.HeaderTopNavItem>
-                |
-                <S.HeaderTopNavItem>
-                  <S.HeaderTopNavLink to={ROUTES.CATALOG}>
-                    Help
-                  </S.HeaderTopNavLink>
-                </S.HeaderTopNavItem>
-                |
-                {user ? (
-                  <>
-                    <S.HeaderTopNavItem>
-                      <S.HeaderTopNavLink to={ROUTES.PROFILE}>
-                        Hi, {user.username}
-                        <UserIcon />
-                      </S.HeaderTopNavLink>
-                    </S.HeaderTopNavItem>
-                  </>
-                ) : (
-                  <>
-                    <S.HeaderTopNavItem>
-                      <S.HeaderTopNavLink to={ROUTES.REGISTER}>
-                        Join Us
-                      </S.HeaderTopNavLink>
-                    </S.HeaderTopNavItem>
-                    |
-                    <S.HeaderTopNavItem>
-                      <S.HeaderTopNavLink to={ROUTES.LOGIN}>
-                        Sign In
-                      </S.HeaderTopNavLink>
-                    </S.HeaderTopNavItem>
-                  </>
-                )}
-              </S.HeaderTopNavList>
-            </S.HeaderTopNav>
-          </S.HeaderTopWrapper>
-        </Container>
-      </S.HeaderTop>
-      <S.Header>
-        <Container>
-          <S.HeaderWrapper>
-            <S.HeaderLogo to={ROUTES.MAIN}>
-              <NikeLogo />
-            </S.HeaderLogo>
-            <S.Navigation>
-              <S.NavigationList>
-                <S.NavigationItem>
-                  <S.NavigationLink to={ROUTES.CATALOG}>
-                    New & Featured
-                  </S.NavigationLink>
-                </S.NavigationItem>
-                <S.NavigationItem>
-                  <S.NavigationLink to={ROUTES.CATALOG}>Men</S.NavigationLink>
-                </S.NavigationItem>
-                <S.NavigationItem>
-                  <S.NavigationLink to={ROUTES.CATALOG}>Women</S.NavigationLink>
-                </S.NavigationItem>
-                <S.NavigationItem>
-                  <S.NavigationLink to={ROUTES.CATALOG}>Kids</S.NavigationLink>
-                </S.NavigationItem>
-                <S.NavigationItem>
-                  <S.NavigationLink to={ROUTES.CATALOG}>Sale</S.NavigationLink>
-                </S.NavigationItem>
-                <S.NavigationItem>
-                  <S.NavigationLink to={ROUTES.CATALOG}>
-                    SNKERS
-                  </S.NavigationLink>
-                </S.NavigationItem>
-              </S.NavigationList>
-            </S.Navigation>
-            <S.HeaderButtons>
-              <Search placeholder="Search" />
-              <S.ActionBtn to={ROUTES.FAVORITES}>
-                <FavIcon />
-              </S.ActionBtn>
-              <S.ActionBtn to={ROUTES.CART}>
-                <CartIcon />
-                {cart.length ? (
-                  <S.ActionBtnBadge>{cart.length}</S.ActionBtnBadge>
-                ) : (
-                  ""
-                )}
-              </S.ActionBtn>
-            </S.HeaderButtons>
-          </S.HeaderWrapper>
-        </Container>
-      </S.Header>
-    </>
-  );
+    return (
+        <>
+            <header className={s['header']}>
+                <Container>
+                    <div className={s['wrapper']}>
+                        <NavLink className={s['logo']} to={ROUTES.MAIN}>
+                            <NikeLogo />
+                        </NavLink>
+                        <nav className={s['nav']}>
+                            <ul className={s['nav-list']}>
+                                {HEADER_NAV.map((item, idx) => (
+                                    <li className={s['nav-item']} key={idx}>
+                                        <NavLink
+                                            className={s['nav-link']}
+                                            to={item.path}
+                                        >
+                                            {item.title}
+                                        </NavLink>
+                                    </li>
+                                ))}
+                            </ul>
+                        </nav>
+                        <div className={s['actions']}>
+                            <Search placeholder="Search" />
+                            <NavLink
+                                className={s['action']}
+                                to={ROUTES.FAVORITES}
+                            >
+                                <FavIcon />
+                            </NavLink>
+                            <NavLink className={s['action']} to={ROUTES.CART}>
+                                <CartIcon />
+                                {cart.length ? (
+                                    <span className={s['action__badge']}>
+                                        {cart.length}
+                                    </span>
+                                ) : (
+                                    ''
+                                )}
+                            </NavLink>
+                        </div>
+                    </div>
+                </Container>
+            </header>
+        </>
+    );
 };
 
 export default Header;
