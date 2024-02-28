@@ -37,7 +37,7 @@ class ProductReviewSerializer(serializers.ModelSerializer):
     user = UserSerializer()
     class Meta:
         model = Review
-        fields = ('user', 'title', 'text', 'star', 'time_created')
+        fields = ('id', 'user', 'title', 'text', 'star', 'time_created')
 
 
 class MainProductDetailSerializer(serializers.ModelSerializer):
@@ -45,7 +45,7 @@ class MainProductDetailSerializer(serializers.ModelSerializer):
     reviews = ProductReviewSerializer(many=True)
     class Meta:
         model = Product 
-        exclude = ('id', )
+        fields = '__all__'
 
 
 class ProductItemDetailSerializer(serializers.ModelSerializer):
@@ -68,3 +68,10 @@ class ProductDetailSerializer(serializers.ModelSerializer):
         data = ProductItemDetailSerializer(product_items, many=True).data
         return data
 
+
+# REVIEW 
+
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review 
+        fields = ('title', 'text', 'star')
