@@ -1,9 +1,21 @@
 from django.contrib import admin
-from .models import *
-
+from .models import (
+    Product,
+    ProductItem,
+    ProductSize,
+    Category,
+    ProductColor,
+    ProductShots,
+    Review,
+    Cart,
+    CartItem
+)
 
 class ProductAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug': ('name', 'color')}
+    prepopulated_fields = {'product_slug': ('name',)}
+
+class ProductItemAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'item_slug': ('color',)}
 
 
 class ReviewAdmin(admin.ModelAdmin):
@@ -11,6 +23,7 @@ class ReviewAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Product, ProductAdmin)
+admin.site.register(ProductItem, ProductItemAdmin)
 admin.site.register(ProductSize)
 admin.site.register(Category)
 admin.site.register(ProductColor)
