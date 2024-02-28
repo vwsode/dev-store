@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Product, ProductItem, ProductShots, Review
+from .models import Product, ProductItem, ProductShots, Review, CartItem, Cart, ProductSize
 from django.contrib.auth import get_user_model
 
 
@@ -28,10 +28,17 @@ class ProductShotsSerializer(serializers.ModelSerializer):
         exclude = ('id', 'product_item')
 
 
+class ProductSizeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductSize
+        fields = '__all__'
+
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
         fields = ('first_name', 'last_name')
+
 
 class ProductReviewSerializer(serializers.ModelSerializer):
     user = UserSerializer()
@@ -53,10 +60,11 @@ class ProductItemDetailSerializer(serializers.ModelSerializer):
         model = ProductItem
         exclude = ('product', 'price', 'size', 'color', 'sale_price', 'item_slug')
 
+
 class ProductDetailSerializer(serializers.ModelSerializer):
     product = MainProductDetailSerializer()
     color = serializers.SlugRelatedField(slug_field='name', read_only=True, many=True)
-    size = serializers.SlugRelatedField(slug_field='size', read_only=True, many=True)
+    size = ProductSizeSerializer(many=True)
     images = ProductShotsSerializer(many=True)
     additional_product_items = serializers.SerializerMethodField()
     class Meta:
@@ -75,3 +83,36 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review 
         fields = ('title', 'text', 'star')
+
+
+# CART 
+
+
+class CartProductSerializer(serializers.ModelSerializer):
+    category = serializers.SlugRelatedField(slug_field='name', read_only=True)
+    class Meta:
+        model = Product 
+        fields = ('id', 'name', 'category')
+
+
+class CartProductItemSerializer(serializers.ModelSerializer):
+    product = ProductSerializer()
+    class Meta:
+        model = ProductItem
+        fields = ('id', 'product', 'main_image')
+
+
+
+class CartItemSerializer(serializers.ModelSerializer):
+    product_item = CartProductItemSerializer()
+    size = ProductSizeSerializer()
+    class Meta:
+        model = CartItem
+        fields = ('product_item', 'qty', 'total_item_price', 'size')
+
+
+class CartSerializer(serializers.ModelSerializer):
+    items = CartItemSerializer(many=True)
+    class Meta:
+        model = Cart
+        fields = ('items', 'total_price')

@@ -106,17 +106,22 @@ class Cart(models.Model):
 
     def __str__(self):
         return f"{self.user.get_username()} Shopping Cart"
+    
+    def total_price(self):
+        total = sum(item.total_item_price() for item in self.items.all())
+        return total
 
 
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name="items")
     product_item = models.ForeignKey(ProductItem, on_delete=models.CASCADE)
+    size = models.ForeignKey(ProductSize, on_delete=models.SET_NULL, null=True)
     qty = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return f"{self.product_item.product.name} - {self.qty}"
 
-    def total_price(self):
+    def total_item_price(self):
         if self.product_item.sale_price > 0:
             return self.product_item.sale_price * self.qty
         else:

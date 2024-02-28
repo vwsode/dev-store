@@ -11,8 +11,10 @@ from .models import (
     CartItem
 )
 
+
 class ProductAdmin(admin.ModelAdmin):
     prepopulated_fields = {'product_slug': ('name',)}
+
 
 class ProductItemAdmin(admin.ModelAdmin):
     prepopulated_fields = {'item_slug': ('color',)}

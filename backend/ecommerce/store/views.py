@@ -1,8 +1,8 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import generics
-from .serializers import ProductItemSerializer, ProductDetailSerializer, ReviewSerializer
-from .models import ProductItem, Review
+from .serializers import ProductItemSerializer, ProductDetailSerializer, ReviewSerializer, CartSerializer
+from .models import ProductItem, Review, Cart, CartItem
 from rest_framework.permissions import IsAuthenticated
 
 
@@ -40,35 +40,34 @@ class ReviewView(APIView):
         return Response({'Success': 'Review has been deleted!'})
 
 
-# class CartView(APIView):
-#     permission_classes = (IsAuthenticated,)
+# CART 
 
-#     def get(self, request):
-#         cart, _ = Cart.objects.get_or_create(user_id=request.user.id)
-#         serializer = CartSerializer(cart)
-#         data = serializer.data
-#         return Response(data)
 
-#     def post(self, request):
-#         cart, _ = Cart.objects.get_or_create(user_id=request.user.id)
-#         product_id = request.data.get("product_id")
-#         quantity = request.data.get("quantity")
-
-#         if product_id and quantity:
-#             product = Product.objects.get(pk=product_id)
-#             cart_item, _ = CartItem.objects.get_or_create(cart=cart, product=product)
-#             cart_item.quantity = quantity
-#             cart_item.save()
-#             return Response({"Success": "Products have been updated"})
-#         return Response({"Error! Expected fields": "product_id and quantity"})
-
-#     def delete(self, request):
-#         cart, _ = Cart.objects.get_or_create(user_id=request.user.id)
-#         product_id = request.data.get("product_id")
-
-#         if product_id:
-#             product = Product.objects.get(pk=product_id)
-#             cart_item = CartItem.objects.get(cart=cart, product=product)
-#             cart_item.delete()
-#             return Response({"Success": "Product has been deleted"})
-#         return Response({"Error! Expected field": "product_id"})
+class CartView(APIView):
+    def get(self, request):
+        cart, _ = Cart.objects.get_or_create(user=request.user)
+        serializer = CartSerializer(cart)
+        data = serializer.data 
+        return Response(data)
+    
+    def post(self, request):
+        cart, _ = Cart.objects.get_or_create(user=request.user)
+        product_id = request.data.get('product_id')
+        qty = request.data.get('qty')
+        size_id = request.data.get('size_id')
+        if product_id and qty and size_id:
+            cart_item, _ = CartItem.objects.get_or_create(cart=cart, product_item_id=product_id, size_id=size_id)
+            cart_item.qty = qty 
+            cart_item.save()
+            return Response({"Success": "Cart has been updated"})
+        return Response({"Error!": "Excepted fields: product_id, qty, size_id"})
+    
+    def delete(self, request):
+        cart = Cart.objects.get(user=request.user)
+        product_id = request.data.get('product_id')
+        size_id = request.data.get('size_id')
+        if product_id and size_id:
+            cart_item = CartItem.objects.get(cart=cart, product_item_id=product_id, size_id=size_id)
+            cart_item.delete()
+            return Response({"Success": "Product has been deleted"})
+        return Response({"Error! Expected fields": "product_id, size_id"})
