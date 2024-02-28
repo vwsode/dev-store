@@ -1,8 +1,9 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import generics
-from .serializers import ProductItemSerializer, ProductDetailSerializer
-from .models import ProductItem
+from .serializers import ProductItemSerializer, ProductDetailSerializer, ReviewSerializer
+from .models import ProductItem, Review
+from rest_framework.permissions import IsAuthenticated
 
 
 # PRODUCT
@@ -18,27 +19,25 @@ class ProductDetailView(APIView):
         serializer = ProductDetailSerializer(product_item, context={'request': request}).data 
         serializer['main_image'] = request.build_absolute_uri(product_item.main_image.url)
         return Response(serializer)
-    
 
 
+# REVIEW
 
-# class ProductDetailView(APIView):
-#     permission_classes = (IsAuthenticatedOrReadOnly,)
 
-#     def get(self, request, pk):
-#         print(request.user)
-#         product = Product.objects.get(pk=pk)
-#         serializer = ProductDetailSerializer(product, context={"request": request})
-#         data = serializer.data
-#         data["main_image"] = request.build_absolute_uri(product.main_image.url)
-#         return Response(data)
+class ReviewView(APIView):
+    permission_classes = (IsAuthenticated,)
 
-#     def post(self, request, pk):
-#         review = ReviewSerializer(data=request.POST)
-#         if review.is_valid():
-#             review.save(product_id=pk, username_id=request.user.id)
-#             return Response(status=201)
-#         return Response({"response": "error"})
+    def post(self, request):
+        review = ReviewSerializer(data=request.POST)
+        product_id = request.POST.get('product_id')
+        if review.is_valid(raise_exception=True):
+            review.save(product_id=product_id, user=request.user)
+            return Response(review.data)
+        
+    def delete(self, request):
+        review = Review.objects.get(pk=request.POST['review_id'])
+        review.delete()
+        return Response({'Success': 'Review has been deleted!'})
 
 
 # class CartView(APIView):
