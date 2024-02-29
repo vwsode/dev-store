@@ -30,14 +30,14 @@ export const makeReview = async (review: {
 
 export const addToCart = async (
     id: number,
-    qunatity: number,
+    quantity: number,
     token: string,
 ) => {
     const { data } = await axios.post(
         `${BASE_URL}/cart`,
         {
             id,
-            qunatity,
+            quantity,
         },
         {
             headers: {

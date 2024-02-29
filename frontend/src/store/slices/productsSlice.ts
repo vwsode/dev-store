@@ -1,73 +1,122 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getProductById, getProducts } from "../../api/productApi.ts";
-import type { Product } from "../../types/types";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { getProductById, getProducts } from '../../api/productApi.ts';
+// import type { Product } from '../../types/types';
+import type { ProductDetails } from '@/types/product.type.ts';
 
 export const fetchProducts = createAsyncThunk(
-  "products/fetchAllProducts",
-  async () => {
-    return await getProducts();
-  },
+    'products/fetchAllProducts',
+    async () => {
+        return await getProducts();
+    },
 );
 
 export const fetchProduct = createAsyncThunk(
-  "products/fetchProduct",
-  async (id: number) => {
-    return await getProductById(id);
-  },
+    'products/fetchProduct',
+    async (id: number) => {
+        const data = await getProductById(id);
+
+        return {
+            id: data.id,
+            product: {
+                id: data.product.id,
+                category: data.product.category,
+                reviews: data.product.reviews.map(
+                    (item: {
+                        id: number;
+                        star: number;
+                        text: string;
+                        time_created: string;
+                        title: string;
+                        user: { first_name: string; last_name: string };
+                    }) => ({
+                        id: item.id,
+                        star: item.star,
+                        text: item.text,
+                        timeCreated: item.time_created,
+                        title: item.title,
+                        user: {
+                            firstName: item.user.first_name,
+                            lastName: item.user.last_name,
+                        },
+                    }),
+                ),
+                name: data.product.name,
+                description: data.product.description,
+                productSlug: data.product.product_slug,
+            },
+            color: data.color,
+            size: data.size,
+            images: data.images,
+            additionalProductItems: data.additional_product_items.map(
+                (item: { id: number; main_image: string }) => ({
+                    id: item.id,
+                    mainImage: item.main_image,
+                }),
+            ),
+            price: data.price,
+            salePrice: data.sale_price,
+            itemSlug: data.item_slug,
+            mainImage: data.main_image,
+        };
+    },
 );
 
 interface ProductsState {
-  products: Product[];
-  loading: boolean;
-  product: Product;
+    products: Product[];
+    loading: boolean;
+    product: ProductDetails;
 }
 
 const initialState: ProductsState = {
-  products: [],
-  loading: false,
-  product: {
-    category: "",
-    color: [],
-    size: [],
-    sale_price: 0,
-    main_image: "",
-    slug: "",
-    reviews: [],
-    id: 0,
-    images: [],
-    name: "",
-    description: "",
-    price: 0,
-  },
+    products: [],
+    loading: false,
+    product: {
+        id: 0,
+        product: {
+            id: 1,
+            category: '',
+            reviews: [],
+            name: '',
+            description: '',
+            productSlug: '',
+        },
+        color: [],
+        size: [],
+        images: [],
+        additionalProductItems: [],
+        price: 180,
+        salePrice: 190,
+        itemSlug: '',
+        mainImage: '',
+    },
 };
 
 export const productsSlice = createSlice({
-  name: "products",
-  initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(fetchProducts.pending, (state) => {
-      state.loading = true;
-    });
-    builder.addCase(fetchProducts.fulfilled, (state, action) => {
-      state.products = action.payload;
-      state.loading = false;
-    });
-    builder.addCase(fetchProducts.rejected, (state) => {
-      state.loading = false;
-    });
-
-    builder.addCase(fetchProduct.pending, (state) => {
-      state.loading = true;
-    });
-    builder.addCase(fetchProduct.fulfilled, (state, action) => {
-      state.product = action.payload;
-      state.loading = false;
-    });
-    builder.addCase(fetchProduct.rejected, (state) => {
-      state.loading = false;
-    });
-  },
+    name: 'products',
+    initialState,
+    reducers: {},
+    extraReducers: (builder) => {
+        builder.addCase(fetchProducts.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(fetchProducts.fulfilled, (state, action) => {
+            state.products = action.payload;
+            state.loading = false;
+        });
+        builder.addCase(fetchProducts.rejected, (state) => {
+            state.loading = false;
+        });
+        builder.addCase(fetchProduct.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(fetchProduct.fulfilled, (state, action) => {
+            state.product = action.payload;
+            state.loading = false;
+        });
+        builder.addCase(fetchProduct.rejected, (state) => {
+            state.loading = false;
+        });
+    },
 });
 
 export default productsSlice.reducer;

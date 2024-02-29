@@ -1,0 +1,41 @@
+.titles {
+  display: flex;
+  flex-direction: column;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 376px;
+  flex-shrink: 0;
+  height: max-content;
+}
+
+
+.sale-price {
+  text-decoration: line-through;
+  margin-left: 12px;
+  color: var(--gray-400);
+}
+
+.colors {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.color-item {
+  width: 70px;
+  height: 70px;
+  display: inline-block;
+
+  border-radius: 4px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}

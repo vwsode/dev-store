@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useFormik } from 'formik';
-import { schema } from '../../../../utils/validationSchemas/productSchema.ts';
+import { schema } from '@utils/validationSchemas/productSchema.ts';
 
 import SizeSelect from '../../../product/SizeSelect/SizeSelect.tsx';
 import Button from '../../ui/Button/Button.tsx';
