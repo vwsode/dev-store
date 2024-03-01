@@ -8,7 +8,8 @@ from .models import (
     ProductShots,
     Review,
     Cart,
-    CartItem
+    CartItem,
+    SubCategory
 )
 
 
@@ -28,6 +29,7 @@ admin.site.register(Product, ProductAdmin)
 admin.site.register(ProductItem, ProductItemAdmin)
 admin.site.register(ProductSize)
 admin.site.register(Category)
+admin.site.register(SubCategory)
 admin.site.register(ProductColor)
 admin.site.register(ProductShots)
 admin.site.register(Review, ReviewAdmin)

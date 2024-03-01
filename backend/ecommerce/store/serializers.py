@@ -50,6 +50,7 @@ class ProductReviewSerializer(serializers.ModelSerializer):
 class MainProductDetailSerializer(serializers.ModelSerializer):
     category = serializers.SlugRelatedField(slug_field='name', read_only=True)
     reviews = ProductReviewSerializer(many=True)
+    avg_rating = serializers.FloatField()
     class Meta:
         model = Product 
         fields = '__all__'
@@ -116,3 +117,37 @@ class CartSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cart
         fields = ('items', 'total_price')
+
+
+# FILTER 
+
+
+class ProductManSerializer(serializers.ModelSerializer):
+    category = serializers.SlugRelatedField('name', read_only=True)
+    sub_category = serializers.SlugRelatedField('name', read_only=True)
+    
+    class Meta:
+        model = Product 
+        # fields = '__all__'
+        exclude = ('id', 'description')
+
+class ManSerializer(serializers.ModelSerializer):
+    size = serializers.SlugRelatedField('size', read_only=True, many=True)
+    color = serializers.SlugRelatedField('name', read_only=True, many=True)
+    count_of_colors = serializers.SerializerMethodField()
+    discount_percent = serializers.SerializerMethodField()
+    product = ProductManSerializer()
+
+    def get_count_of_colors(self, obj):
+        return obj.color.count()
+    
+    def get_discount_percent(self, obj):
+        if obj.sale_price > 0:
+            percent = round(100 - (obj.sale_price * 100 / obj.price))
+        else:
+            percent = 0 
+        return percent
+    
+    class Meta:
+        model = ProductItem
+        fields = '__all__'
