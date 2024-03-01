@@ -23,3 +23,25 @@ export type Cart = {
     items: CartItem[];
     totalPrice: number;
 };
+
+
+// type CartItem = {
+//     items: {
+//         totalItemPrice: number;
+//         qty: number;
+//         size: {
+//             id: number;
+//             size: number;
+//         };
+//         productItem: {
+//             id: number;
+//             mainImage: string;
+//             product: {
+//                 category: string;
+//                 id: string;
+//                 name: string;
+//             };
+//         };
+//     }[];
+//     totalPrice: number;
+// };

@@ -24,11 +24,16 @@ const useCart = () => {
         dispatch(removeFromCart(id));
     };
 
-    const addItemToCart = (id: number, quantity: number) => {
+    const addItemToCart = (
+        productId: number,
+        quantity: number,
+        sizeId: number,
+    ) => {
         dispatch(
             addToCart({
-                id,
+                productId,
                 quantity,
+                sizeId,
             }),
         );
     };

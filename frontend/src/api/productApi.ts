@@ -28,16 +28,28 @@ export const makeReview = async (review: {
     return data;
 };
 
+export const getCartItems = async (token: string) => {
+    const { data } = await axios.get(`${BASE_URL}/cart/`, {
+        headers: {
+            Authorization: `Token ${token}`,
+        },
+    });
+
+    return data;
+};
+
 export const addToCart = async (
-    id: number,
+    productId: number,
     quantity: number,
     token: string,
+    sizeId: number,
 ) => {
     const { data } = await axios.post(
-        `${BASE_URL}/cart`,
+        `${BASE_URL}/cart/`,
         {
-            id,
-            quantity,
+            product_id: productId,
+            qty: quantity,
+            size_id: sizeId,
         },
         {
             headers: {

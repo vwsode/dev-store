@@ -12,7 +12,7 @@ import s from './Product.module.scss';
 
 const Product = () => {
     const { id } = useParams();
-    const { setProduct } = useProduct();
+    const { setProduct, loading } = useProduct();
 
     useEffect(() => {
         if (id) {
@@ -24,7 +24,7 @@ const Product = () => {
         <Container size="sm">
             <section className={s['product']}>
                 <ProductImagesSlider />
-                <ProductInfo />
+                <ProductInfo isLoading={loading} />
             </section>
         </Container>
     );

@@ -20,7 +20,7 @@ const ProductImagesSlider = () => {
                 slidesPerView={9}
                 spaceBetween={10}
                 onSwiper={setThumbs}
-                loop={true}
+                // loop={true}
             >
                 {product.images.map((item, idx) => (
                     <SwiperSlide key={idx}>

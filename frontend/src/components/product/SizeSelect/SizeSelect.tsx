@@ -44,7 +44,7 @@ const SizeSelect: FC<Props> = ({
                         <input
                             className={s['field-input']}
                             onChange={handleChangeSize}
-                            value={size.size}
+                            value={size.id}
                             name={name}
                             type="radio"
                             checked={size.toString() === currentSize}

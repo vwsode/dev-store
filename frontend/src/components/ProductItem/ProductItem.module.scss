@@ -1,0 +1,51 @@
+.card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+}
+
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.image {
+    width: 100%;
+    height: 348px;
+    object-fit: cover;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+}
+
+.messaging {}
+
+.titles {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+}
+
+.prices {
+    display: flex;
+    gap: 8px;
+}
+
+.sale-price {
+    color: var(--gray-400);
+    text-decoration: line-through;
+}
+
+
+.category {
+    color: var(--gray-400);
+}
+
+.curr-price {}

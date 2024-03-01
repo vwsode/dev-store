@@ -20,12 +20,12 @@
 }
 
 .colors {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  gap: 6px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
 }
 
-.color-item {
+.color-item, .color-item-active {
   width: 70px;
   height: 70px;
   display: inline-block;
@@ -38,4 +38,8 @@
     height: 100%;
     object-fit: cover;
   }
+}
+
+.color-item-active {
+  border: 1px solid var(--gray-600);
 }

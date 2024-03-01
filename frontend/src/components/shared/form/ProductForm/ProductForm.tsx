@@ -19,12 +19,8 @@ const ProductForm: FC<Props> = () => {
             size: '',
         },
         validationSchema: schema,
-        onSubmit: () => {
-            // console.log('add-to-cart');
-            // console.log('remove-from-cart');
-
-            addItemToCart(product.id, 1);
-            // removeItemFormCart(Number(product.id));
+        onSubmit: (values) => {
+            addItemToCart(product.id, 1, Number(values.size));
 
             formik.resetForm();
         },

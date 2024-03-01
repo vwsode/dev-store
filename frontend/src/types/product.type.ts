@@ -19,9 +19,9 @@ type Image = {
 
 type Product = {
     id: number;
+    name: string;
     category: string;
     reviews: Review[];
-    name: string;
     description: string;
     productSlug: string;
 };
@@ -29,6 +29,15 @@ type Product = {
 type AdditionalProductItem = {
     id: number;
     mainImage: string;
+};
+
+export type ProductCard = {
+    id: number;
+    product: Omit<Product, 'reviews' | 'description' | 'productSlug'>;
+    price: number;
+    salePrice: number;
+    mainImage: string;
+    itemSlug: string;
 };
 
 export type ProductDetails = {

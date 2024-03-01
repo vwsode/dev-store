@@ -1,12 +1,33 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getProductById, getProducts } from '../../api/productApi.ts';
-// import type { Product } from '../../types/types';
-import type { ProductDetails } from '@/types/product.type.ts';
+import type { ProductCard, ProductDetails } from '@/types/product.type.ts';
 
 export const fetchProducts = createAsyncThunk(
     'products/fetchAllProducts',
     async () => {
-        return await getProducts();
+        const data = await getProducts();
+
+        return data.map(
+            (item: {
+                id: number;
+                product: { id: number; name: string; category: string };
+                price: number;
+                sale_price: number;
+                main_image: string;
+                item_slug: string;
+            }) => ({
+                id: item.id,
+                product: {
+                    id: item.product.id,
+                    name: item.product.name,
+                    category: item.product.category,
+                },
+                price: item.price,
+                salePrice: item.sale_price,
+                mainImage: item.main_image,
+                itemSlug: item.item_slug,
+            }),
+        );
     },
 );
 
@@ -62,7 +83,7 @@ export const fetchProduct = createAsyncThunk(
 );
 
 interface ProductsState {
-    products: Product[];
+    products: ProductCard[];
     loading: boolean;
     product: ProductDetails;
 }
