@@ -131,6 +131,7 @@ class ProductManSerializer(serializers.ModelSerializer):
         # fields = '__all__'
         exclude = ('id', 'description')
 
+
 class ManSerializer(serializers.ModelSerializer):
     size = serializers.SlugRelatedField('size', read_only=True, many=True)
     color = serializers.SlugRelatedField('name', read_only=True, many=True)
