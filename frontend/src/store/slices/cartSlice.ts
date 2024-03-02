@@ -34,8 +34,8 @@ export const fetchCartItems = createAsyncThunk(
                             };
                         };
                     }) => ({
-                        totalItemPrice: item.total_item_price,
-                        qty: item.qty,
+                        totalPrice: item.total_item_price,
+                        quantity: item.qty,
                         size: item.size,
                         productItem: {
                             id: item.product_item.id,

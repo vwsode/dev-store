@@ -1,29 +1,39 @@
 import { FC } from 'react';
-import ContentLoader from 'react-content-loader';
 import { NavLink } from 'react-router-dom';
+import ContentLoader from 'react-content-loader';
 
-// import { Typography } from '@/shared/ui/index.ts';
+import { Typography } from '../shared/ui';
 
+import { Size } from '@/types/product.type';
 import useCart from '@/hooks/useCart.ts';
+
+import FavIcon from '@/assets/icons/favorite.svg?react';
+import TrashIcon from '@/assets/icons/trash.svg?react';
 
 import s from './CartItem.module.scss';
 
 type Props = {
     name: string;
     price: number;
+    salePrice?: number;
     category: string;
     id: number;
     image: string;
     isLoading: boolean;
+    size: Size;
+    quantity: number;
 };
 
 const CartItem: FC<Props> = ({
     name,
     price,
+    salePrice,
     category,
     id,
     image,
     isLoading,
+    quantity,
+    size,
 }) => {
     const { removeItemFormCart } = useCart();
 
@@ -50,29 +60,77 @@ const CartItem: FC<Props> = ({
             <NavLink to="/catalog/1">
                 <img className={s['image']} src={image} alt="" />
             </NavLink>
-            {/* <Typography /> */}
             <div className={s['content']}>
                 <div className={s['info']}>
                     <div className={s['info-left']}>
-                        <h5 className="cart-item__title">
+                        <Typography bold variant="body1" className={s['title']}>
                             <NavLink to={`/catalog/${id}`}>{name}</NavLink>
-                        </h5>
-                        <h6 className="cart-item__subtitle">{category}</h6>
+                        </Typography>
+                        <Typography
+                            bold
+                            variant="body1"
+                            className={s['subtitle']}
+                        >
+                            {category}
+                        </Typography>
+                        <div className={s['params']}>
+                            <div className={s['param']}>
+                                <Typography
+                                    bold
+                                    className={s['param-title']}
+                                    variant="subtitle1"
+                                >
+                                    Size
+                                </Typography>
+                                <Typography
+                                    className={s['param-value']}
+                                    variant="subtitle1"
+                                >
+                                    {size.size}
+                                </Typography>
+                            </div>
+                            <div className={s['param']}>
+                                <Typography
+                                    bold
+                                    className={s['param-title']}
+                                    variant="subtitle1"
+                                >
+                                    Quantity
+                                </Typography>
+                                <Typography
+                                    className={s['param-value']}
+                                    variant="subtitle1"
+                                >
+                                    {quantity}
+                                </Typography>
+                            </div>
+                        </div>
                     </div>
                     <div className={s['info-right']}>
-                        <span className="cart-item__price">${price}</span>
+                        <Typography bold variant="body2" className={s['price']}>
+                            ${price}
+                        </Typography>
+                        {salePrice && (
+                            <Typography
+                                bold
+                                variant="body2"
+                                className={s['sale-price']}
+                            >
+                                ${salePrice}
+                            </Typography>
+                        )}
                     </div>
                 </div>
 
                 <div className={s['actions']}>
-                    <button className="cart-item__action-btn">
-                        {/*<FavIcon />*/}
+                    <button className={s['action']}>
+                        <FavIcon />
                     </button>
                     <button
-                        className="cart-item__action-btn"
+                        className={s['action']}
                         onClick={() => removeItemFormCart(id)}
                     >
-                        {/*<TrashIcon />*/}
+                        <TrashIcon />
                     </button>
                 </div>
             </div>

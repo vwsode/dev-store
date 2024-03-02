@@ -1,13 +1,91 @@
-.card {}
+.card {
+    display: flex;
+}
 
-.image {}
+.image {
+    width: 154px;
+    height: 154px;
+    margin-right: 16px;
+    object-fit: cover;
+}
 
-.content {}
+.content {
+    flex: 1 0 0;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+}
 
-.info {}
+.info {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
 
-.actions {}
+.actions {
+    display: flex;
+    gap: 16px;
+    margin-top: auto;
+}
 
-.info-left {}
+.action {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+
+
+    svg path {
+        transition: stroke 100ms;
+    }
+
+
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            svg path {
+                stroke: var(--gray-300);
+            }
+        }
+    }
+}
+
+.info-left {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
 
 .info-right {}
+
+.title {
+    a {
+        text-decoration: none;
+        color: var(--gray-200);
+
+    }
+}
+
+.subtitle {
+    color: var(--gray-300);
+}
+
+.price {}
+
+.params {
+    display: flex;
+    gap: 12px;
+}
+
+.param {
+    display: flex;
+    gap: 8px;
+}
+
+.param-title,
+.param-value {
+    color: var(--gray-300);
+}

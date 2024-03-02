@@ -1,12 +1,11 @@
 import { Fragment, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import CartItem from '../../components/cart/Item/CartItem.tsx';
-import Container from '../../components/shared/ui/Container/Container.tsx';
-import Button from '../../components/shared/ui/Button/Button.tsx';
+import { Button, Container } from '@/components/shared/ui/index.ts';
 
 import './Cart.scss';
-import useCart from '../../hooks/useCart.ts';
+import useCart from '@/hooks/useCart';
+import CartItem from '@/components/CartItem/CartItem.tsx';
 
 const Cart = () => {
     const { cart, loadCart, totalPrice, loading } = useCart();
@@ -32,19 +31,32 @@ const Cart = () => {
                         <h2 className="cart__title">Bag</h2>
                         {cart.length ? (
                             <div className="cart__items">
-                                {cart.map((item) => (
-                                    <Fragment key={item.id}>
-                                        <CartItem
-                                            isLoading={loading}
-                                            id={item.id}
-                                            images={item.images}
-                                            name={item.name}
-                                            price={item.price}
-                                            category={item.category}
-                                        />
-                                        <hr />
-                                    </Fragment>
-                                ))}
+                                {cart.map((item, index) => {
+                                    return (
+                                        <Fragment key={index}>
+                                            <CartItem
+                                                quantity={item.quantity}
+                                                size={item.size}
+                                                isLoading={loading}
+                                                id={item.productItem.id}
+                                                image={
+                                                    'http://127.0.0.1:8000/' +
+                                                    item.productItem.mainImage
+                                                }
+                                                name={
+                                                    item.productItem.product
+                                                        .name
+                                                }
+                                                price={item.totalPrice}
+                                                category={
+                                                    item.productItem.product
+                                                        .category
+                                                }
+                                            />
+                                            <hr />
+                                        </Fragment>
+                                    );
+                                })}
                             </div>
                         ) : (
                             <p className="cart-empty-message">
