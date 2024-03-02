@@ -1,16 +1,31 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import generics
-from .serializers import ProductItemSerializer, ProductDetailSerializer, ReviewSerializer, CartSerializer
+from .serializers import ProductItemSerializer, ProductDetailSerializer, ReviewSerializer, CartSerializer, ManSerializer
 from .models import ProductItem, Review, Cart, CartItem
 from rest_framework.permissions import IsAuthenticated
+from rest_framework import filters
 
 
 # PRODUCT
 
 class ProductListView(generics.ListAPIView):
     serializer_class = ProductItemSerializer
-    queryset = ProductItem.objects.all()
+    queryset = ProductItem.objects.order_by('-id')[:10]
+
+    # filter_backends = [filters.SearchFilter]
+    # search_fields = ['product__name', ]
+    # def get_queryset(self):
+    #     queryset = ProductItem.objects.all()
+    #     price = self.request.query_params.get('price')
+    #     if price:
+    #         queryset = queryset.filter(price=price)
+    #     return queryset
+
+
+class ProductManView(generics.ListAPIView):
+    serializer_class = ManSerializer
+    queryset = ProductItem.objects.filter(product__category__name="Men's Shoes")
 
 
 class ProductDetailView(APIView):

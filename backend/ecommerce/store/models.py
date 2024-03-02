@@ -19,6 +19,14 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+    
+class SubCategory(models.Model):
+    class Meta:
+        verbose_name_plural = 'Sub Categories'
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
 
 
 class ProductSize(models.Model):
@@ -38,11 +46,16 @@ class ProductColor(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=255)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    sub_category = models.ForeignKey(SubCategory, on_delete=models.SET_NULL, null=True)
     description = models.TextField()
     product_slug = models.SlugField(unique=True, max_length=100, null=True)
 
     def __str__(self):
         return self.name
+    
+    def avg_rating(self):
+        rating = [review.star for review in self.reviews.all()]
+        return round(sum(rating) / len(rating), 1)
 
 
 class ProductItem(models.Model):
@@ -61,8 +74,7 @@ class ProductItem(models.Model):
     def __str__(self):
         colors = ", ".join([color.name for color in self.color.all()])
         return f"{self.product.name} - {colors}"
-
-
+   
 
 class ProductShots(models.Model):
     class Meta:
