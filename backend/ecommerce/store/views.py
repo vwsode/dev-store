@@ -2,13 +2,13 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import generics
 from .serializers import ProductItemSerializer, ProductDetailSerializer, ReviewSerializer, CartSerializer, FilterSerializer
-from .models import ProductItem, Review, Cart, CartItem
+from .models import ProductItem, Review, Cart, CartItem, ProductSize
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import filters
-from django.db.models import Q, Count
+from django.db.models import Q
 
 
-# PRODUCT
+# PRODUCT LIST
 
 class ProductListView(generics.ListAPIView):
     serializer_class = ProductItemSerializer
@@ -98,20 +98,22 @@ class CartView(APIView):
         cart, _ = Cart.objects.get_or_create(user=request.user)
         product_id = request.data.get('product_id')
         qty = request.data.get('qty')
-        size_id = request.data.get('size_id')
-        if product_id and qty and size_id:
-            cart_item, _ = CartItem.objects.get_or_create(cart=cart, product_item_id=product_id, size_id=size_id)
-            cart_item.qty = qty 
+        size_data = request.data.get('size')
+
+        if product_id and qty and size_data:
+            size = ProductSize.objects.get(size=size_data)
+            cart_item, _ = cart.items.get_or_create(product_item_id=product_id, size=size)
+            cart_item.qty = qty
             cart_item.save()
             return Response({"Success": "Cart has been updated"})
-        return Response({"Error!": "Excepted fields: product_id, qty, size_id"})
+        return Response({"Error!": "Excepted fields: product_id, qty, size"})
     
     def delete(self, request):
         cart = Cart.objects.get(user=request.user)
         product_id = request.data.get('product_id')
-        size_id = request.data.get('size_id')
-        if product_id and size_id:
-            cart_item = CartItem.objects.get(cart=cart, product_item_id=product_id, size_id=size_id)
+        size = request.data.get('size')
+        if product_id and size:
+            cart_item = cart.items.get(cart=cart, product_item_id=product_id, size__size=size)
             cart_item.delete()
             return Response({"Success": "Product has been deleted"})
-        return Response({"Error! Expected fields": "product_id, size_id"})
+        return Response({"Error! Expected fields": "product_id, size"})

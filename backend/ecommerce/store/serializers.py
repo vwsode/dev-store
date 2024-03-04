@@ -119,10 +119,10 @@ class CartProductItemSerializer(serializers.ModelSerializer):
 class CartItemSerializer(serializers.ModelSerializer):
     product_item = CartProductItemSerializer()
 
-    # size = ProductSizeSerializer()
+    size = serializers.SlugRelatedField(slug_field='size', read_only=True)
     class Meta:
         model = CartItem
-        fields = ("product_item", "qty", "total_item_price")
+        fields = ("product_item", "qty", "total_item_price", 'size')
 
 
 class CartSerializer(serializers.ModelSerializer):
