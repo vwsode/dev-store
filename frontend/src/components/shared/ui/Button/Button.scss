@@ -82,3 +82,29 @@
 
   //font: 500 1rem/1.5 'Helvetica Now Text Medium',Helvetica,Arial,sans-serif;
 }
+
+
+.btn-flat {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  color: var(--gray-100);
+  font-weight: 500;
+  font-size: 16px;
+  background: transparent;
+  cursor: pointer;
+
+  width: max-content;
+
+  &:hover {
+    border-color: var(--gray-200);
+    color: var(--gray-200);
+  }
+
+}
+
+
+.btn-xs {
+  padding: 10px 20px;
+}

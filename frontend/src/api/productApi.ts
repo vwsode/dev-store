@@ -61,14 +61,18 @@ export const addToCart = async (
     return data;
 };
 
-export const removeFromCart = async (id: number, token: string) => {
-    const { data } = await axios.delete(`${BASE_URL}`, {
+export const removeFromCart = async (
+    id: number,
+    sizeId: number,
+    token: string,
+) => {
+    const { data } = await axios.delete(`${BASE_URL}/cart/`, {
         data: {
-            id,
+            product_id: id,
+            size_id: sizeId,
         },
         headers: {
             Authorization: `Token ${token}`,
-            'Access-Control-Allow-Origin': '*',
         },
     });
 

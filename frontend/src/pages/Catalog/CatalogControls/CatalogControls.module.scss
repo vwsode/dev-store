@@ -1,0 +1,15 @@
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+
+    margin-top: 20px;
+}
+
+
+.sort {
+    svg {
+        transform: rotate(-90deg);
+    }
+}

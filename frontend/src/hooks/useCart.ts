@@ -13,15 +13,20 @@ const useCart = () => {
     );
 
     const isItemInCart = (id: number) => {
-        return cart.some((item) => item.id === Number(id));
+        return cart.some((item) => item.productItem.id === Number(id));
     };
 
     const loadCart = () => {
         dispatch(fetchCartItems());
     };
 
-    const removeItemFormCart = (id: number) => {
-        dispatch(removeFromCart(id));
+    const removeItemFormCart = (productId: number, sizeId: number) => {
+        dispatch(
+            removeFromCart({
+                productId,
+                sizeId,
+            }),
+        );
     };
 
     const addItemToCart = (

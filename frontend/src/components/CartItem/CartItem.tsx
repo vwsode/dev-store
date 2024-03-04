@@ -107,13 +107,13 @@ const CartItem: FC<Props> = ({
                         </div>
                     </div>
                     <div className={s['info-right']}>
-                        <Typography bold variant="body2" className={s['price']}>
+                        <Typography bold variant="body1" className={s['price']}>
                             ${price}
                         </Typography>
                         {salePrice && (
                             <Typography
                                 bold
-                                variant="body2"
+                                variant="body1"
                                 className={s['sale-price']}
                             >
                                 ${salePrice}
@@ -128,7 +128,7 @@ const CartItem: FC<Props> = ({
                     </button>
                     <button
                         className={s['action']}
-                        onClick={() => removeItemFormCart(id)}
+                        onClick={() => removeItemFormCart(id, size.id)}
                     >
                         <TrashIcon />
                     </button>

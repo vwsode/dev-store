@@ -78,11 +78,21 @@ export const addToCart = createAsyncThunk(
 
 export const removeFromCart = createAsyncThunk(
     'cart/removeFromCart',
-    async (itemId: number, { dispatch, getState }) => {
+    async (
+        data: {
+            productId: number;
+            sizeId: number;
+        },
+        { dispatch, getState },
+    ) => {
         const { user } = getState() as RootState;
 
         if (user.user?.authToken) {
-            await removeFromCartApi(itemId, user.user.authToken);
+            await removeFromCartApi(
+                data.productId,
+                data.sizeId,
+                user.user.authToken,
+            );
             dispatch(fetchCartItems());
         }
     },

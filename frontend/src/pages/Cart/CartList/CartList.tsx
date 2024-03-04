@@ -3,24 +3,23 @@ import { FC, Fragment } from 'react';
 import CartItem from '@/components/CartItem/CartItem';
 import { Typography } from '@/components/shared/ui';
 
-import type { CartItem as CartItemType } from '@/types/cart.type';
+import useCart from '@/hooks/useCart';
 
 import s from './CartList.module.scss';
 
-type Props = {
-    items: CartItemType[];
-    loading?: boolean;
-};
+const CartList: FC = () => {
+    const { cart, loading } = useCart();
 
-const CartList: FC<Props> = ({ items, loading = false }) => {
     return (
         <>
-            {items.length ? (
+            {cart.length ? (
                 <div className={s['items']}>
-                    {items.map((item, index) => {
+                    {cart.map((item, index) => {
                         return (
                             <Fragment key={index}>
                                 <CartItem
+                                    size={item.size}
+                                    quantity={item.quantity}
                                     isLoading={loading}
                                     id={item.productItem.id}
                                     image={
