@@ -1,10 +1,11 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import generics
-from .serializers import ProductItemSerializer, ProductDetailSerializer, ReviewSerializer, CartSerializer, ManSerializer
+from .serializers import ProductItemSerializer, ProductDetailSerializer, ReviewSerializer, CartSerializer, FilterSerializer
 from .models import ProductItem, Review, Cart, CartItem
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import filters
+from django.db.models import Q, Count
 
 
 # PRODUCT
@@ -21,11 +22,39 @@ class ProductListView(generics.ListAPIView):
     #     if price:
     #         queryset = queryset.filter(price=price)
     #     return queryset
+    # queryset = ProductItem.objects.filter(product__category__name="Men's Shoes")
 
 
-class ProductManView(generics.ListAPIView):
-    serializer_class = ManSerializer
-    queryset = ProductItem.objects.filter(product__category__name="Men's Shoes")
+# FILTER
+
+class ProductFilterView(generics.ListAPIView):
+    serializer_class = FilterSerializer
+    def get_queryset(self):
+        gender = self.kwargs['gender']
+        queryset = ProductItem.objects.all()
+        filters = []
+        color = self.request.query_params.getlist('color')
+        style = self.request.query_params.getlist('style')
+        size = self.request.query_params.getlist('size')
+        min_price = self.request.query_params.get('min_price')
+        max_price = self.request.query_params.get('max_price')
+        filters.append(Q(product__category__slug=gender))
+        if color:
+            filters.append(Q(color__name__in=color))
+        if style:
+            filters.append(Q(product__style__name__in=style))
+        if size:
+            filters.append(Q(size__size__in=size))
+        if min_price:
+            filters.append(Q(price__gte=min_price))
+        if max_price:
+            filters.append(Q(price__lte=max_price))
+
+        if filters:
+            queryset = queryset.filter(*filters)
+
+
+        return queryset
 
 
 class ProductDetailView(APIView):

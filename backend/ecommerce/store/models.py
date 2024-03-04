@@ -1,8 +1,8 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth import get_user_model
-from django.utils.text import slugify
 from django.db.models.signals import pre_save
+from django.utils.text import slugify
 from django.dispatch import receiver
 
 
@@ -20,9 +20,10 @@ class Category(models.Model):
     def __str__(self):
         return self.name
     
-class SubCategory(models.Model):
+class Style(models.Model):
     class Meta:
-        verbose_name_plural = 'Sub Categories'
+        verbose_name_plural = 'Styles'
+        
     name = models.CharField(max_length=100)
 
     def __str__(self):
@@ -46,7 +47,7 @@ class ProductColor(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=255)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
-    sub_category = models.ForeignKey(SubCategory, on_delete=models.SET_NULL, null=True)
+    style = models.ForeignKey(Style, on_delete=models.SET_NULL, null=True)
     description = models.TextField()
     product_slug = models.SlugField(unique=True, max_length=100, null=True)
 
@@ -74,7 +75,7 @@ class ProductItem(models.Model):
     def __str__(self):
         colors = ", ".join([color.name for color in self.color.all()])
         return f"{self.product.name} - {colors}"
-   
+    
 
 class ProductShots(models.Model):
     class Meta:
