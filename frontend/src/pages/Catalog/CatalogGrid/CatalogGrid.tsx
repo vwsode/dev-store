@@ -24,6 +24,39 @@ const CatalogGrid: FC<Props> = ({ products }) => {
                     salePrice={product.salePrice}
                 />
             ))}
+            {products.map((product) => (
+                <ProductItem
+                    key={product.id}
+                    id={product.id}
+                    image={product.mainImage}
+                    name={product.product.name}
+                    category={product.product.category}
+                    price={product.price}
+                    salePrice={product.salePrice}
+                />
+            ))}
+            {products.map((product) => (
+                <ProductItem
+                    key={product.id}
+                    id={product.id}
+                    image={product.mainImage}
+                    name={product.product.name}
+                    category={product.product.category}
+                    price={product.price}
+                    salePrice={product.salePrice}
+                />
+            ))}
+            {products.map((product) => (
+                <ProductItem
+                    key={product.id}
+                    id={product.id}
+                    image={product.mainImage}
+                    name={product.product.name}
+                    category={product.product.category}
+                    price={product.price}
+                    salePrice={product.salePrice}
+                />
+            ))}
         </div>
     );
 };

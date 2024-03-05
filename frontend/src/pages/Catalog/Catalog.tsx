@@ -18,7 +18,7 @@ const Catalog = () => {
     }, []);
 
     return (
-        <div>
+        <div className={s['wrapper']}>
             <CatalogControls />
             <Container>
                 <div className={s['grid-wrapper']}>

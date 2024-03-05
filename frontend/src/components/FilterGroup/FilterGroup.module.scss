@@ -1,0 +1,33 @@
+.toggle {
+    transform: rotate(-90deg);
+    transition: transform 200ms;
+}
+
+.group {
+    display: flex;
+    flex-direction: column;
+
+    &.active {
+        position: relative;
+
+        .toggle {
+            transform: rotate(90deg);
+        }
+    }
+}
+
+.top {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content-wrap {
+    overflow: hidden;
+}
+
+.content {
+    position: relative;
+    margin-top: 16px;
+}

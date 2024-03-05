@@ -1,18 +1,22 @@
-import { InputHTMLAttributes } from 'react';
+import { InputHTMLAttributes, ReactNode } from 'react';
 
 import s from './Checkbox.module.scss';
 
 interface ICheckbox extends InputHTMLAttributes<HTMLInputElement> {
-    label: string;
+    label: string | ReactNode;
 }
 
-const Checkbox = ({ label, ...props }: ICheckbox) => {
+const Checkbox = ({ label, className, ...props }: ICheckbox) => {
     return (
-        <label className={s['label']}>
+        <label className={`${s['label']} ${className}`}>
             <span className={s['icon']}>
                 <input className={s['input']} type="checkbox" {...props} />
             </span>
-            <span className={s['text']}>{label}</span>
+            {typeof label === 'string' ? (
+                <span className={s['text']}>{label}</span>
+            ) : (
+                <>{label}</>
+            )}
         </label>
     );
 };
