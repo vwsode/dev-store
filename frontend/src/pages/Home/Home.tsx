@@ -2,6 +2,7 @@
 
 import Banner from './Banner/Banner';
 import Categories from './Categories/Categories';
+import Slider from './Slider/Slider';
 import Slogan from './Slogan/Slogan';
 
 const Home = () => (
@@ -16,7 +17,7 @@ const Home = () => (
             description="Fresh voices, fire fits, and new kicks. Shop a brand new collection insipred by strong women"
         />
         <Categories categories={[]} title="Featured" />
-        Main Page
+        <Slider />
     </div>
 );
 

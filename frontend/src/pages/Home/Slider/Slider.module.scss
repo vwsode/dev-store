@@ -1,0 +1,55 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 40px 0;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.slider-controls {
+    display: flex;
+    align-self: flex-end;
+    gap: 8px;
+}
+
+.slider {
+    width: 100%;
+}
+
+.slider-prev,
+.slider-next {
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    place-items: center;
+    height: 48px;
+    width: 48px;
+    color: black;
+    background-color: rgb(255, 255, 255);
+    border-radius: 999px;
+    outline: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: var(--gray-700);
+
+    &:hover {
+        background-color: var(--gray-700);
+    }
+
+    &:active {
+        background-color: var(--gray-600);
+    }
+}
+
+.slider-next {
+    svg {
+        transform: rotate(180deg);
+    }
+}

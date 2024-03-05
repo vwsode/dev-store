@@ -27,12 +27,26 @@ const SliderItem: FC<Props> = ({
             <img src={image} alt="" />
             <div className={s['info']}>
                 <div className={s['titles']}>
-                    <Typography variant="body1">{title}</Typography>
-                    <Typography variant="body1">{category}</Typography>
+                    <Typography className={s['title']} bold variant="body1">
+                        {title}
+                    </Typography>
+                    <Typography className={s['category']} bold variant="body1">
+                        {category}
+                    </Typography>
                 </div>
                 <div className={s['prices']}>
-                    <Typography variant="body1">{price}</Typography>
-                    <Typography variant="body1">{salePrice}</Typography>
+                    <Typography className={s['price']} bold variant="body1">
+                        ${price}
+                    </Typography>
+                    {salePrice && (
+                        <Typography
+                            className={s['sale-price']}
+                            bold
+                            variant="body1"
+                        >
+                           ${salePrice}
+                        </Typography>
+                    )}
                 </div>
             </div>
         </div>
