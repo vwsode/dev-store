@@ -1,0 +1,7 @@
+venv
+
+store/__pycache__
+store/migrations/__pycache__
+auth_user/__pycache__
+auth_user/migrations/__pycache__
+ecommerce/__pycache__
