@@ -35,7 +35,15 @@ class ProductItemSerializer(serializers.ModelSerializer):
 class ProductShotsSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductShots
-        exclude = ("id", "product_item")
+        fields = ()
+
+    def to_representation(self, obj):
+        images = []
+        for i in range(1, 5):
+            image_field = getattr(obj, f"image{i}")
+            if image_field:
+                images.append(image_field.url)
+        return images
 
 
 class UserSerializer(serializers.ModelSerializer):

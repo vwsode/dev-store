@@ -5,3 +5,5 @@ store/migrations/__pycache__
 auth_user/__pycache__
 auth_user/migrations/__pycache__
 ecommerce/__pycache__
+ecommerce_cache/*
+!ecommerce_cache/.gitkeep
