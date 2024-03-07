@@ -9,7 +9,9 @@ type Props = {
     name: string;
     category: string;
     price: number;
-    salePrice: number;
+    newPrice: number;
+    isSale: boolean;
+    isLoading?: boolean;
 };
 
 const ProductItem = ({
@@ -18,15 +20,27 @@ const ProductItem = ({
     name,
     category,
     price,
-    salePrice,
+    newPrice,
+    isSale,
+    isLoading = false,
 }: Props) => {
     return (
         <div className={s['card']}>
             <NavLink className={s['overlay']} to={id.toString()}></NavLink>
-            <img className={s['image']} src={image} alt={name} />
+            {isLoading ? (
+                <div className={s['image-loading']}>
+                    <img
+                        className={s['image']}
+                        src="https://cdn140.picsart.com/269683146015211.png"
+                        alt=""
+                    />
+                </div>
+            ) : (
+                <img className={s['image']} src={image} alt={name} />
+            )}
             <div className={s['info']}>
                 <div className={s['titles']}>
-                    <Typography bold variant="body2">
+                    <Typography bold variant="body1">
                         {name}
                     </Typography>
                     <Typography className={s['category']} bold variant="body2">
@@ -39,15 +53,15 @@ const ProductItem = ({
                         bold
                         variant="body1"
                     >
-                        ${price}
+                        ${newPrice}
                     </Typography>
-                    {!!salePrice && (
+                    {isSale && (
                         <Typography
                             className={s['sale-price']}
                             bold
                             variant="body1"
                         >
-                            ${salePrice}
+                            ${price}
                         </Typography>
                     )}
                 </div>

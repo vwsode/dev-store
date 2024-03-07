@@ -13,15 +13,16 @@ export type Review = {
 };
 
 type Image = {
-    alt: string;
+    alt?: string;
     image: string;
 };
 
 type Product = {
-    id: number;
-    name: string;
     category: string;
     reviews: Review[];
+    style: string;
+    avgRating: number;
+    name: string;
     description: string;
     productSlug: string;
 };
@@ -35,7 +36,8 @@ export type ProductCard = {
     id: number;
     product: Omit<Product, 'reviews' | 'description' | 'productSlug'>;
     price: number;
-    salePrice: number;
+    newPrice: number;
+    isSale: boolean;
     mainImage: string;
     itemSlug: string;
 };
@@ -44,11 +46,12 @@ export type ProductDetails = {
     id: number;
     product: Product;
     color: string[];
-    size: Size[];
+    size: number[];
     images: Image[];
     additionalProductItems: AdditionalProductItem[];
     price: number;
-    salePrice: number;
+    newPrice: number;
+    isSale: boolean;
     itemSlug: string;
     mainImage: string;
 };

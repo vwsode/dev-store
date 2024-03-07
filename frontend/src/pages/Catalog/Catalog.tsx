@@ -11,7 +11,7 @@ import useProducts from '@/hooks/useProducts.ts';
 import s from './Catalog.module.scss';
 
 const Catalog = () => {
-    const { products, setProducts } = useProducts();
+    const { products, setProducts, loading } = useProducts();
 
     useEffect(() => {
         setProducts();
@@ -23,7 +23,7 @@ const Catalog = () => {
             <Container>
                 <div className={s['grid-wrapper']}>
                     <CatalogFilter />
-                    <CatalogGrid products={products} />
+                    <CatalogGrid isLoading={loading} products={products} />
                 </div>
             </Container>
         </div>

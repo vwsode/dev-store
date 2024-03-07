@@ -3,10 +3,9 @@ import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
 
 import s from './SizeSelect.module.scss';
-import { Size } from '@/types/product.type';
 
 interface Props {
-    sizes: Size[];
+    sizes: number[];
     name: string;
     onChange: (size: string) => void;
     currentSize: string | null;
@@ -40,16 +39,16 @@ const SizeSelect: FC<Props> = ({
             </legend>
             <div className={s['grid']}>
                 {sizes.map((size) => (
-                    <label className={s['field']} key={size.id}>
+                    <label className={s['field']} key={size}>
                         <input
                             className={s['field-input']}
                             onChange={handleChangeSize}
-                            value={size.id}
+                            value={size}
                             name={name}
                             type="radio"
                             checked={size.toString() === currentSize}
                         />
-                        <span className={s['field-text']}>{size.size}</span>
+                        <span className={s['field-text']}>{size}</span>
                     </label>
                 ))}
             </div>

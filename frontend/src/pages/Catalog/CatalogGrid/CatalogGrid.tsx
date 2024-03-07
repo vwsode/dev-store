@@ -8,9 +8,10 @@ import s from './CatalogGrid.module.scss';
 
 type Props = {
     products: ProductCard[];
+    isLoading: boolean;
 };
 
-const CatalogGrid: FC<Props> = ({ products }) => {
+const CatalogGrid: FC<Props> = ({ products, isLoading }) => {
     return (
         <div className={s['grid']}>
             {products.map((product) => (
@@ -21,7 +22,9 @@ const CatalogGrid: FC<Props> = ({ products }) => {
                     name={product.product.name}
                     category={product.product.category}
                     price={product.price}
-                    salePrice={product.salePrice}
+                    newPrice={product.newPrice}
+                    isSale={product.isSale}
+                    isLoading={isLoading}
                 />
             ))}
             {products.map((product) => (
@@ -32,7 +35,9 @@ const CatalogGrid: FC<Props> = ({ products }) => {
                     name={product.product.name}
                     category={product.product.category}
                     price={product.price}
-                    salePrice={product.salePrice}
+                    newPrice={product.newPrice}
+                    isSale={product.isSale}
+                    isLoading={isLoading}
                 />
             ))}
             {products.map((product) => (
@@ -43,7 +48,9 @@ const CatalogGrid: FC<Props> = ({ products }) => {
                     name={product.product.name}
                     category={product.product.category}
                     price={product.price}
-                    salePrice={product.salePrice}
+                    newPrice={product.newPrice}
+                    isSale={product.isSale}
+                    isLoading={isLoading}
                 />
             ))}
             {products.map((product) => (
@@ -54,7 +61,9 @@ const CatalogGrid: FC<Props> = ({ products }) => {
                     name={product.product.name}
                     category={product.product.category}
                     price={product.price}
-                    salePrice={product.salePrice}
+                    newPrice={product.newPrice}
+                    isSale={product.isSale}
+                    isLoading={isLoading}
                 />
             ))}
         </div>

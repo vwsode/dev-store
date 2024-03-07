@@ -12,7 +12,8 @@ export const fetchProducts = createAsyncThunk(
                 id: number;
                 product: { id: number; name: string; category: string };
                 price: number;
-                sale_price: number;
+                new_price: number;
+                is_sale: boolean;
                 main_image: string;
                 item_slug: string;
             }) => ({
@@ -23,7 +24,8 @@ export const fetchProducts = createAsyncThunk(
                     category: item.product.category,
                 },
                 price: item.price,
-                salePrice: item.sale_price,
+                newPrice: item.new_price,
+                isSale: item.is_sale,
                 mainImage: item.main_image,
                 itemSlug: item.item_slug,
             }),
@@ -39,18 +41,17 @@ export const fetchProduct = createAsyncThunk(
         return {
             id: data.id,
             product: {
-                id: data.product.id,
+                style: data.product.styles,
+                avgRating: data.product.avg_rating,
                 category: data.product.category,
                 reviews: data.product.reviews.map(
                     (item: {
-                        id: number;
                         star: number;
                         text: string;
                         time_created: string;
                         title: string;
                         user: { first_name: string; last_name: string };
                     }) => ({
-                        id: item.id,
                         star: item.star,
                         text: item.text,
                         timeCreated: item.time_created,
@@ -74,8 +75,9 @@ export const fetchProduct = createAsyncThunk(
                     mainImage: item.main_image,
                 }),
             ),
+            newPrice: data.new_price,
             price: data.price,
-            salePrice: data.sale_price,
+            isSale: data.is_sale,
             itemSlug: data.item_slug,
             mainImage: data.main_image,
         };
@@ -94,19 +96,21 @@ const initialState: ProductsState = {
     product: {
         id: 0,
         product: {
-            id: 1,
             category: '',
             reviews: [],
             name: '',
             description: '',
             productSlug: '',
+            style: '',
+            avgRating: 0,
         },
         color: [],
         size: [],
         images: [],
         additionalProductItems: [],
         price: 180,
-        salePrice: 190,
+        isSale: false,
+        newPrice: 190,
         itemSlug: '',
         mainImage: '',
     },

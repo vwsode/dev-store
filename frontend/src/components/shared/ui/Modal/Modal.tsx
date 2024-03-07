@@ -3,7 +3,7 @@ import cn from 'classnames';
 
 import styles from './Modal.module.scss';
 
-import CloseIcon from '../../../../assets/icons/close.svg?react';
+import CloseIcon from '@/assets/icons/close.svg?react';
 
 interface Props {
     children: ReactNode;

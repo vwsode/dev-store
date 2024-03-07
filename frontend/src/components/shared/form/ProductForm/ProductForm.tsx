@@ -1,11 +1,12 @@
 import { FC } from 'react';
 import { useFormik } from 'formik';
-import { schema } from '@utils/validationSchemas/productSchema.ts';
 
-import SizeSelect from '../../../product/SizeSelect/SizeSelect.tsx';
-import Button from '../../ui/Button/Button.tsx';
-import useProducts from '../../../../hooks/useProducts.ts';
-import useCart from '../../../../hooks/useCart.ts';
+import SizeSelect from '@/components/SizeSelect/SizeSelect.tsx';
+import { Button } from '@/components/shared/ui/index.ts';
+
+import useProducts from '@/hooks/useProducts.ts';
+import useCart from '@/hooks/useCart.ts';
+import { schema } from '@utils/validationSchemas/productSchema.ts';
 
 import s from './ProductForm.module.scss';
 

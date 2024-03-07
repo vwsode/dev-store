@@ -1,16 +1,16 @@
 import { NavLink } from 'react-router-dom';
 
-import useCart from '../../../hooks/useCart.ts';
+import useCart from '@/hooks/useCart.ts';
 
-import Container from '../../shared/ui/Container/Container.tsx';
-import Search from '../../shared/ui/Search/Search.tsx';
+// import Container from '@/components/shared/ui/Container/Container.tsx';
+import { Container, Search } from '@/components/shared/ui';
 
-import { ROUTES } from '../../../config/routes.ts';
-import { HEADER_NAV } from '../../../config/navigation.ts';
+import { ROUTES } from '@/config/routes.ts';
+import { HEADER_NAV } from '@/config/navigation.ts';
 
-import NikeLogo from '../../../assets/icons/nike-logo.svg?react';
-import CartIcon from '../../../assets/icons/cart.svg?react';
-import FavIcon from '../../../assets/icons/favorite.svg?react';
+import NikeLogo from '@/assets/icons/nike-logo.svg?react';
+import CartIcon from '@/assets/icons/cart.svg?react';
+import FavIcon from '@/assets/icons/favorite.svg?react';
 
 import s from './Header.module.scss';
 

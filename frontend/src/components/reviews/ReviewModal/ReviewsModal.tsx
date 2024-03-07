@@ -1,10 +1,11 @@
-import Modal from '../../shared/ui/Modal/Modal';
-import ReviewForm from '../../shared/form/ReviewForm/ReviewForm';
+import ProductItemMini from '@/components/ProductItemMini/ProductItemMini';
+import ReviewForm from '@/components/shared/form/ReviewForm/ReviewForm';
+import { Modal } from '@/components/shared/ui';
 
-import styles from './ReviewsModal.module.scss';
-import ProductMini from '../../product/ProductMini/ProductMini';
-import useProducts from '../../../hooks/useProducts';
-import { ROUTES } from '../../../config/routes';
+import useProducts from '@/hooks/useProducts';
+import { ROUTES } from '@/config/routes';
+
+import s from './ReviewsModal.module.scss';
 
 interface Props {
     isOpen: boolean;
@@ -17,16 +18,16 @@ const ReviewModal = ({ isOpen = false, onClose }: Props) => {
     return (
         <Modal onClose={onClose} isOpen={isOpen}>
             <Modal.Header>
-                <div className={styles['text']}>
-                    <h2 className={styles['title']}>Write a Review</h2>
-                    <p className={styles['description']}>
+                <div className={s['text']}>
+                    <h2 className={s['title']}>Write a Review</h2>
+                    <p className={s['description']}>
                         Share your thoughts with the community.
                     </p>
                 </div>
-                <ProductMini
-                    image={product.main_image}
-                    title={product.name}
-                    description={product.category}
+                <ProductItemMini
+                    image={product.mainImage}
+                    title={product.product.name}
+                    description={product.product.category}
                     link={`${ROUTES.CATALOG}/${product.id}`}
                 />
             </Modal.Header>

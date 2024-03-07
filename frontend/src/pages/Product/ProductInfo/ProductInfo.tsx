@@ -18,6 +18,9 @@ type Props = {
 const ProductInfo: FC<Props> = ({ isLoading = false }) => {
     const { product } = useProduct();
 
+    console.log(product);
+    
+
     return (
         <div className={s['info']}>
             {isLoading ? (
@@ -142,24 +145,24 @@ const ProductInfo: FC<Props> = ({ isLoading = false }) => {
             ) : (
                 <>
                     <div className={s['titles']}>
-                        <Typography variant="h2">
+                        <Typography bold variant="h4">
                             {product.product.name}
                         </Typography>
-                        <Typography variant="body2">
+                        <Typography bold variant="body1">
                             {product.product.category}
                         </Typography>
                     </div>
                     <div className={s['text']}>
-                        <Typography bold variant="body2">
-                            ${product.price}
+                        <Typography bold variant="body1">
+                            ${product.newPrice}
                         </Typography>
-                        {!!product.salePrice && (
+                        {product.isSale && (
                             <Typography
                                 bold
-                                variant="body2"
+                                variant="body1"
                                 className={s['sale-price']}
                             >
-                                ${product.salePrice}
+                                ${product.price}
                             </Typography>
                         )}
                     </div>
@@ -198,7 +201,7 @@ const ProductInfo: FC<Props> = ({ isLoading = false }) => {
             <ReviewsList
                 productName={product.product.name}
                 reviews={product.product.reviews}
-                totalRating={3}
+                totalRating={product.product.avgRating}
             />
         </div>
     );
