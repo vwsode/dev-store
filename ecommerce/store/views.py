@@ -12,6 +12,8 @@ from .models import ProductItem, Review, Cart, ProductSize
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import filters
 from django.db.models import Q
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from rest_framework.pagination import PageNumberPagination
 
 
@@ -25,6 +27,10 @@ class ProductListView(generics.ListAPIView):
     search_fields = ["product__name",]
     pagination_class = PageNumberPagination
     page_size = 10
+
+    @method_decorator(cache_page(60 * 60 * 2))
+    def get(self, *args, **kwargs):
+        return super().get(*args, **kwargs)
 
 
 # FILTER
@@ -60,12 +66,16 @@ class ProductFilterView(generics.ListAPIView):
         return queryset
 
 
-class ProductDetailView(APIView):
-    def get(self, request, pk):
-        product_item = ProductItem.objects.get(pk=pk)
-        serializer = ProductDetailSerializer(product_item, context={"request": request}).data
-        serializer["main_image"] = request.build_absolute_uri(product_item.main_image.url)
-        return Response(serializer)
+# DETAIL
+
+class ProductDetailView(generics.RetrieveAPIView):
+    serializer_class = ProductDetailSerializer
+    queryset = ProductItem.objects.all()
+
+    @method_decorator(cache_page(60 * 60 * 2))
+    def get(self, *args, **kwargs):
+        return super().get(*args, **kwargs)
+
 
 
 # REVIEW

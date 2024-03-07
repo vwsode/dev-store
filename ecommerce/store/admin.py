@@ -11,6 +11,7 @@ from .models import (
     CartItem,
     Style
 )
+from django.utils.safestring import mark_safe
 
 
 class ProductAdmin(admin.ModelAdmin):
@@ -18,7 +19,11 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 class ProductItemAdmin(admin.ModelAdmin):
+    list_display = ['__str__', 'price', 'is_sale', 'new_price', 'image']
     prepopulated_fields = {'item_slug': ('color', 'product')}
+
+    def image(self, obj):
+        return mark_safe("<img src='{}' width='50px' />".format(obj.main_image.url))
 
 
 class ReviewAdmin(admin.ModelAdmin):
