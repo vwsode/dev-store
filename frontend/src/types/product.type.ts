@@ -47,7 +47,7 @@ export type ProductDetails = {
     product: Product;
     color: string[];
     size: number[];
-    images: Image[];
+    images: string[];
     additionalProductItems: AdditionalProductItem[];
     price: number;
     newPrice: number;

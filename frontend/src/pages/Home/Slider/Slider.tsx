@@ -3,8 +3,9 @@ import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide, SwiperClass } from 'swiper/react';
 
 import { Container, Typography } from '@/components/shared/ui';
-
 import SliderItem from '@/components/SliderItem/SliderItem';
+
+import useProducts from '@/hooks/useProducts';
 
 import Chevron from '@/assets/icons/chevron.svg?react';
 import s from './Slider.module.scss';
@@ -14,6 +15,8 @@ type Props = {
 };
 
 const Slider: FC<Props> = () => {
+    const { products } = useProducts();
+
     const swiperRef = useRef<SwiperClass | null>(null);
 
     return (
@@ -47,49 +50,19 @@ const Slider: FC<Props> = () => {
                         }}
                         spaceBetween={20}
                     >
-                        <SwiperSlide>
-                            <SliderItem
-                                title="Nike Dunk Low Retro"
-                                category="Men's Shoes"
-                                image="https://static.nike.com/a/images/q_auto:eco/t_product_v1/f_auto/dpr_1.0/h_593,c_limit/eba7a509-73b5-473f-a964-6bea77d8ebf1/dunk-low-retro-mens-shoes-76KnBL.png"
-                                link="/catalog/"
-                                price={100}
-                                salePrice={250}
-                            />
-                        </SwiperSlide>
-
-                        <SwiperSlide>
-                            <SliderItem
-                                title="Nike Dunk Low Retro"
-                                category="Men's Shoes"
-                                image="https://static.nike.com/a/images/q_auto:eco/t_product_v1/f_auto/dpr_1.0/h_593,c_limit/eba7a509-73b5-473f-a964-6bea77d8ebf1/dunk-low-retro-mens-shoes-76KnBL.png"
-                                link="/catalog/"
-                                price={100}
-                                salePrice={250}
-                            />
-                        </SwiperSlide>
-
-                        <SwiperSlide>
-                            <SliderItem
-                                title="Nike Dunk Low Retro"
-                                category="Men's Shoes"
-                                image="https://static.nike.com/a/images/q_auto:eco/t_product_v1/f_auto/dpr_1.0/h_593,c_limit/eba7a509-73b5-473f-a964-6bea77d8ebf1/dunk-low-retro-mens-shoes-76KnBL.png"
-                                link="/catalog/"
-                                price={100}
-                                salePrice={250}
-                            />
-                        </SwiperSlide>
-
-                        <SwiperSlide>
-                            <SliderItem
-                                title="Nike Dunk Low Retro"
-                                category="Men's Shoes"
-                                image="https://static.nike.com/a/images/q_auto:eco/t_product_v1/f_auto/dpr_1.0/h_593,c_limit/eba7a509-73b5-473f-a964-6bea77d8ebf1/dunk-low-retro-mens-shoes-76KnBL.png"
-                                link="/catalog/"
-                                price={100}
-                                salePrice={250}
-                            />
-                        </SwiperSlide>
+                        {products.map((item) => (
+                            <SwiperSlide key={item.id}>
+                                <SliderItem
+                                    title={item.product.name}
+                                    category={item.product.category}
+                                    image={item.mainImage}
+                                    link={'/catalog/' + item.id}
+                                    price={item.price}
+                                    newPrice={item.newPrice}
+                                    isSale={item.isSale}
+                                />
+                            </SwiperSlide>
+                        ))}
                     </Swiper>
                 </div>
             </Container>

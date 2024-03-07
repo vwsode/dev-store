@@ -10,7 +10,8 @@ type Props = {
     link: string;
     category: string;
     price: number;
-    salePrice?: number;
+    newPrice?: number;
+    isSale: boolean;
 };
 
 const SliderItem: FC<Props> = ({
@@ -19,12 +20,13 @@ const SliderItem: FC<Props> = ({
     link,
     category,
     price,
-    salePrice,
+    newPrice,
+    isSale,
 }) => {
     return (
         <div className={s['card']}>
             <NavLink className={s['overlay-link']} to={link} />
-            <img src={image} alt="" />
+            <img className={s['image']} src={image} alt={title} />
             <div className={s['info']}>
                 <div className={s['titles']}>
                     <Typography className={s['title']} bold variant="body1">
@@ -36,15 +38,15 @@ const SliderItem: FC<Props> = ({
                 </div>
                 <div className={s['prices']}>
                     <Typography className={s['price']} bold variant="body1">
-                        ${price}
+                        ${newPrice}
                     </Typography>
-                    {salePrice && (
+                    {isSale && (
                         <Typography
                             className={s['sale-price']}
                             bold
                             variant="body1"
                         >
-                           ${salePrice}
+                            ${price}
                         </Typography>
                     )}
                 </div>

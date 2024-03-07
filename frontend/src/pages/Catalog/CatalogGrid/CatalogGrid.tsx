@@ -27,45 +27,6 @@ const CatalogGrid: FC<Props> = ({ products, isLoading }) => {
                     isLoading={isLoading}
                 />
             ))}
-            {products.map((product) => (
-                <ProductItem
-                    key={product.id}
-                    id={product.id}
-                    image={product.mainImage}
-                    name={product.product.name}
-                    category={product.product.category}
-                    price={product.price}
-                    newPrice={product.newPrice}
-                    isSale={product.isSale}
-                    isLoading={isLoading}
-                />
-            ))}
-            {products.map((product) => (
-                <ProductItem
-                    key={product.id}
-                    id={product.id}
-                    image={product.mainImage}
-                    name={product.product.name}
-                    category={product.product.category}
-                    price={product.price}
-                    newPrice={product.newPrice}
-                    isSale={product.isSale}
-                    isLoading={isLoading}
-                />
-            ))}
-            {products.map((product) => (
-                <ProductItem
-                    key={product.id}
-                    id={product.id}
-                    image={product.mainImage}
-                    name={product.product.name}
-                    category={product.product.category}
-                    price={product.price}
-                    newPrice={product.newPrice}
-                    isSale={product.isSale}
-                    isLoading={isLoading}
-                />
-            ))}
         </div>
     );
 };

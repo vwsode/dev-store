@@ -68,7 +68,7 @@ export const fetchProduct = createAsyncThunk(
             },
             color: data.color,
             size: data.size,
-            images: data.images,
+            images: data.images[0],
             additionalProductItems: data.additional_product_items.map(
                 (item: { id: number; main_image: string }) => ({
                     id: item.id,

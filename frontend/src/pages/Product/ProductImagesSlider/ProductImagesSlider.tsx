@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide, SwiperClass } from 'swiper/react';
 import useProduct from '@/hooks/useProduct';
 
 import Chevron from '@/assets/icons/chevron.svg?react';
+
 import s from './ProductImagesSlider.module.scss';
 
 const ProductImagesSlider = () => {
@@ -20,14 +21,13 @@ const ProductImagesSlider = () => {
                 slidesPerView={9}
                 spaceBetween={10}
                 onSwiper={setThumbs}
-                // loop={true}
             >
                 {product.images.map((item, idx) => (
                     <SwiperSlide key={idx}>
                         <img
                             className={s['thumbs-img']}
-                            src={item.image}
-                            alt={item.alt}
+                            src={'http://127.0.0.1:8000/' + item}
+                            alt={product.product.name}
                         />
                     </SwiperSlide>
                 ))}
@@ -61,8 +61,8 @@ const ProductImagesSlider = () => {
                         <SwiperSlide key={idx}>
                             <img
                                 className={s['slider-img']}
-                                src={item.image}
-                                alt={item.alt}
+                                src={'http://127.0.0.1:8000/' + item}
+                                alt={product.product.name}
                             />
                         </SwiperSlide>
                     ))}
