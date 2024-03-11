@@ -2,11 +2,14 @@ import axios from 'axios';
 
 const BASE_URL = 'http://127.0.0.1:8000/api';
 
-export const getProducts = async () => {
-    const { data } = await axios.get(`${BASE_URL}/products/?format=json`);
+export const getProducts = async (search?: string) => {
+    const { data } = await axios.get(
+        `${BASE_URL}/products/?format=json${search ? `&search=${search}` : ''}`,
+    );
 
     return data;
 };
+
 export const getProductById = async (id: number) => {
     const { data } = await axios.get(`${BASE_URL}/products/${id}/?format=json`);
 

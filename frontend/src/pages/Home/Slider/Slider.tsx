@@ -1,4 +1,4 @@
-import { FC, useRef } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide, SwiperClass } from 'swiper/react';
 
@@ -8,6 +8,7 @@ import SliderItem from '@/components/SliderItem/SliderItem';
 import useProducts from '@/hooks/useProducts';
 
 import Chevron from '@/assets/icons/chevron.svg?react';
+
 import s from './Slider.module.scss';
 
 type Props = {
@@ -15,9 +16,17 @@ type Props = {
 };
 
 const Slider: FC<Props> = () => {
-    const { products } = useProducts();
+    const { products, setProducts } = useProducts();
 
     const swiperRef = useRef<SwiperClass | null>(null);
+
+    useEffect(() => {
+        setProducts();
+    }, []);
+
+    if (!products.length) {
+        return <></>;
+    }
 
     return (
         <section>

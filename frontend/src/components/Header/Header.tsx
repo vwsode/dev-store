@@ -1,21 +1,28 @@
+import { ChangeEvent } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import useCart from '@/hooks/useCart.ts';
-
-// import Container from '@/components/shared/ui/Container/Container.tsx';
-import { Container, Search } from '@/components/shared/ui';
+import { Container, Search, Typography } from '@/components/shared/ui';
 
 import { ROUTES } from '@/config/routes.ts';
 import { HEADER_NAV } from '@/config/navigation.ts';
+import useCart from '@/hooks/useCart.ts';
+import useSearch from '@/hooks/useSearch';
 
 import NikeLogo from '@/assets/icons/nike-logo.svg?react';
 import CartIcon from '@/assets/icons/cart.svg?react';
 import FavIcon from '@/assets/icons/favorite.svg?react';
 
 import s from './Header.module.scss';
+import ProductItemMini from '../ProductItemMini/ProductItemMini';
 
 const Header = () => {
     const { cart } = useCart();
+    const { searchTerm, setSearch, result } = useSearch();
+
+    const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
+        setSearch(value);
+    };
 
     return (
         <>
@@ -40,7 +47,30 @@ const Header = () => {
                             </ul>
                         </nav>
                         <div className={s['actions']}>
-                            <Search placeholder="Search" />
+                            <div className={s['search']}>
+                                <Search
+                                    value={searchTerm}
+                                    onChange={handleSearchChange}
+                                    placeholder="Search"
+                                />
+                                {searchTerm && (
+                                    <div className={s['search-list']}>
+                                        {result.map((item) => (
+                                            <ProductItemMini
+                                                image={item.mainImage}
+                                                title={item.product.name}
+                                                link={`${ROUTES.CATALOG + '/' + item.id}`}
+                                                key={item.id}
+                                            />
+                                        ))}
+                                        {!result.length && (
+                                            <Typography variant="body2">
+                                                Nothing found
+                                            </Typography>
+                                        )}
+                                    </div>
+                                )}
+                            </div>
                             <NavLink
                                 className={s['action']}
                                 to={ROUTES.FAVORITES}

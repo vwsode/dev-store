@@ -1,6 +1,6 @@
 import { InputHTMLAttributes } from 'react';
 
-import * as S from './Search.styles.ts';
+import s from './Search.module.scss';
 
 import IconSearch from '@/assets/icons/search.svg?react';
 
@@ -8,12 +8,12 @@ interface ISearch extends InputHTMLAttributes<HTMLInputElement> {}
 
 const Search = ({ ...props }: ISearch) => {
     return (
-        <S.Label>
-            <S.IconSearch>
+        <label className={s['label']}>
+            <i className={s['icon']}>
                 <IconSearch />
-            </S.IconSearch>
-            <S.Input {...props} />
-        </S.Label>
+            </i>
+            <input className={s['input']} {...props} />
+        </label>
     );
 };
 

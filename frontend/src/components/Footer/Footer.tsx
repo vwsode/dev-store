@@ -1,13 +1,13 @@
 import { NavLink } from 'react-router-dom';
 
-import Container from '../../shared/ui/Container/Container.tsx';
+import { Container } from '../shared/ui';
 
-import { ROUTES } from '../../../config/routes.ts';
+import { ROUTES } from '@/config/routes.ts';
 
-import Facebook from '../../../assets/icons/facebook.svg?react';
-import Instagram from '../../../assets/icons/instagram.svg?react';
-import Twitter from '../../../assets/icons/twitter.svg?react';
-import YouTube from '../../../assets/icons/youtube.svg?react';
+import Facebook from '@/assets/icons/facebook.svg?react';
+import Instagram from '@/assets/icons/instagram.svg?react';
+import Twitter from '@/assets/icons/twitter.svg?react';
+import YouTube from '@/assets/icons/youtube.svg?react';
 
 import s from './Footer.module.scss';
 

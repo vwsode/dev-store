@@ -1,16 +1,16 @@
 import { NavLink } from 'react-router-dom';
 
-import Container from '../../shared/ui/Container/Container';
+import { Container } from '../shared/ui';
 
-import useUser from '../../../hooks/useUser';
-import { ROUTES } from '../../../config/routes';
+import useUser from '@/hooks/useUser';
+import { ROUTES } from '@/config/routes';
 
-import JordanLogo from '../../../assets/icons/jordan-logo.svg?react';
-import UserIcon from '../../../assets/icons/user.svg?react';
+import JordanLogo from '@/assets/icons/jordan-logo.svg?react';
+import UserIcon from '@/assets/icons/user.svg?react';
 
-import s from './HeaderTop.module.scss';
+import s from './PreHeader.module.scss';
 
-const HeaderTop = () => {
+const PreHeader = () => {
     const { user } = useUser();
 
     return (
@@ -81,4 +81,4 @@ const HeaderTop = () => {
     );
 };
 
-export default HeaderTop;
+export default PreHeader;

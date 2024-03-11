@@ -1,9 +1,9 @@
 import { ReactNode, FC, useEffect } from "react";
 import { RouteProps, useNavigate } from "react-router-dom";
 
-import useUser from "../../../hooks/useUser.ts";
+import useUser from "../../hooks/useUser.ts";
 
-import { ROUTES } from "../../../config/routes.ts";
+import { ROUTES } from "../../config/routes.ts";
 
 type ProtectedRouteProps = RouteProps & {
   element: ReactNode;
